@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lustria - Plant Shop</title>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- bootstrap icon -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- fontawesome icon cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />     
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <!-- Header Section -->
+
+    <header class="bg-light">
+        <nav class="py-2 top-header-bg border-bottom">
+            <div class="container d-flex flex-wrap">
+                <ul class="nav me-auto">
+                    <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i
+                                class="fab fa-facebook-f"></i></a></li>
+                    <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i
+                                class="fab fa-instagram"></i></a></li>
+                    <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i class="fab fa-twitter"></i></a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i class="fab fa-youtube"></i></a>
+                    </li>
+                </ul>
+               
+                <div class="dropdown">
+                    <button class="text-white fw-bold mt-2 btn btn-transparent dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      USD
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                      <li><a class="dropdown-item" href="#">USD - US Dollar</a></li>
+                      <li><a class="dropdown-item" href="#">USD - US Dollar</a></li>
+                      <li><a class="dropdown-item" href="#">USD - US Dollar</a></li>
+                      <li><a class="dropdown-item" href="#">USD - US Dollar</a></li>
+                    
+                    </ul>
+                  </div>
+                <div class="dropdown mx-2">
+                    <button class="text-white mt-2 fw-bold btn btn-transparent  dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      EN
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                      <li><a class="dropdown-item" href="#">French</a></li>
+                      <li><a class="dropdown-item" href="#">Spanish</a></li>
+                      <li><a class="dropdown-item" href="#">Chinese</a></li>
+                      <li><a class="dropdown-item" href="#">Japanese</a></li>
+                    </ul>
+                  </div>
+              
+            </div>
+        </nav>
+
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <div class="logo">
+                    <a href="#" class="navbar-brand"><img src="images/logo.png" alt="Logo"
+                            style="height: 40px;"></a>
+                </div>
+                <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Shop
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Category 1</a>
+                                <a class="dropdown-item" href="#">Category 2</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Category 3</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">All Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Blogs</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Pages
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="about.html">About</a>
+                                <a class="dropdown-item" href="contact.html">Contact</a>
+                                <a class="dropdown-item" href="team-members.html">Team Members</a>
+                                <a class="dropdown-item" href="coming-soon.html">Coming soon </a>
+                                <a class="dropdown-item" href="faq.html">Faq</a>
+                                <a class="dropdown-item" href="404-page.html">404 page</a>
+
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Features</a>
+                        </li>
+                    </ul>
+                    <div class="header-icons">
+                        <a href="#" class="icon nav-link fa fa-search text-dark"></a>
+
+                    </div>
+                    <div class="header-icons">
+                        <a href="#" class="icon nav-link fa fa-heart text-dark"></a>
+
+                    </div>
+                    <div class="header-icons">
+                        <a href="#" class="icon nav-link fa fa-shopping-cart text-dark" aria-hidden="true"></a>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- Hero Section Start-->
+    <section id="hero" class="hero-sec section-padding">
+        <div class="container-fluid">
+            <div class="row gx-5">
+                <div class="row mt-5">
+                    <div class="col-lg-6 col-md-12 mb-4 mb-lg-0 " data-aos="zoom-in">
+
+
+                        <img src="images/banner1.jpg" class="w-100 shadow-1-strong rounded mb-4 mx-3" width="100%"
+                            height="auto" alt="Wintry Mountain Landscape" />
+
+                    </div>
+
+
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+
+                        <img src="images/banner2.jpg" class="w-100 shadow-1-strong rounded mb-4" width="100%"
+                            height="335px" alt="Boat on Calm Water" />
+
+                        <img src="images/banner2.jpg" class="w-100 shadow-1-strong rounded mb-4" width="100%"
+                            height="335px" alt="Waves at Sea" />
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- Hero Section End-->
+
+
+
+    <!-- Products Section -->
+    <section class="products">
+        <div class="section-header ">
+            <button class="border-0 btn-text bg-body">All Plants |</button>
+            <button class="border-0 btn-text bg-body">New Arrivals </button>
+            <button class="border-0 btn-text bg-body"> | Sale</button>
+        </div>
+    </section>
+
+
+    <!-- plants shop categories start -->
+    <div class="container py-5">
+        <div class="row text-center" data-aos="fade-up">
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card product-card position-relative">
+                    <div class="position-relative">
+                        <img src="images/images14.jpg" class="card-img-top" alt="Product 2">
+                        <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+
+                        <!-- Hoverable Icon Dropdown -->
+                        <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+                            <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+                            <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+                            <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+                            <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+                        <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+                        <p class="fw-bold">$75.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card product-card position-relative">
+                    <div class="position-relative">
+                        <img src="images/images15.jpg" class="card-img-top" alt="Product 2">
+                        <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+
+                        <!-- Hoverable Icon Dropdown -->
+                        <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+                            <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+                            <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+                            <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+                            <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+                        <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+                        <p class="fw-bold">$75.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card product-card position-relative">
+                    <div class="position-relative">
+                        <img src="images/images16.jpg" class="card-img-top" alt="Product 2">
+                        <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+
+                        <!-- Hoverable Icon Dropdown -->
+                        <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+                            <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+                            <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+                            <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+                            <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+                        <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+                        <p class="fw-bold">$75.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card product-card position-relative">
+                    <div class="position-relative">
+                        <img src="images/images17.jpg" class="card-img-top" alt="Product 2">
+                        <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+
+                        <!-- Hoverable Icon Dropdown -->
+                        <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+                            <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+                            <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+                            <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+                            <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+                        <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+                        <p class="fw-bold">$75.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" data-aos="fade-up">
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card product-card position-relative">
+                        <div class="position-relative">
+                            <img src="images/images18.jpg" class="card-img-top" alt="Product 2">
+                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+
+                            <!-- Hoverable Icon Dropdown -->
+                            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+                                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+                                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+                                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+                                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+                            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+                            <p class="fw-bold">$75.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card product-card position-relative">
+                        <div class="position-relative">
+                            <img src="images/images19.jpg" class="card-img-top" alt="Product 2">
+                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+
+                            <!-- Hoverable Icon Dropdown -->
+                            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+                                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+                                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+                                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+                                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+                            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+                            <p class="fw-bold">$75.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card product-card position-relative">
+                        <div class="position-relative">
+                            <img src="images/images20.jpg" class="card-img-top" alt="Product 2">
+                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+
+                            <!-- Hoverable Icon Dropdown -->
+                            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+                                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+                                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+                                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+                                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+                            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+                            <p class="fw-bold">$75.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card product-card position-relative">
+                        <div class="position-relative">
+                            <img src="images/images21.jpg" class="card-img-top" alt="Product 2">
+                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+
+                            <!-- Hoverable Icon Dropdown -->
+                            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+                                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+                                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+                                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+                                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+                            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+                            <p class="fw-bold">$75.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- plants shop categories end -->
+
+    <!-- New Summer Collection -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-6 mb-4" data-aos="fade-up">
+
+                <img src="images/collection1.jpg" class="card-img-top" width="100%" height="auto" alt="Image 4">
+                <div class="container-btn">
+
+                    <button class="btn ">Seeds <sup>( 1 )</sup></button>
+                </div>
+
+                <!-- Gallery -->
+                <div class="row mt-4">
+                    <div class="col-lg-6 col-md-12 mb-4 mb-lg-0" data-aos="fade-up">
+                        <img src="images/collection3.jpg" class="w-100 shadow-1-strong rounded mb-4" width="100%"
+                            height="300px" alt="Boat on Calm Water" />
+                        <div class="container-btn">
+
+                            <button class="btn-small p-2">Terrariums <sup>( 1 )</sup></button>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-up">
+
+                        <img src="images/collection4.jpg" class="w-100 shadow-1-strong rounded mb-4" width="100%"
+                            height="300px" alt="Boat on Calm Water" />
+                        <div class="container-btn">
+
+                            <button class="btn-small p-2">House Plants <sup>( 9 )</sup></button>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <!-- Gallery -->
+            </div>
+
+            <div class="col-md-6 mb-4" data-aos="fade-up">
+                <div class=" mb-4">
+                    <img src="images/collection2.jpg" class="card-img-top " width="100%" height="300px" alt="Image 1">
+                    <div class="container-btn">
+
+                        <button class="btn">Potter Plants <sup>( 6 )</sup></button>
+                    </div>
+
+
+                </div>
+                <div>
+                    <img src="images/collection5.jpg" class="card-img-top" alt="Image 5">
+
+                    <div class="container-btn">
+
+                        <button class="btn">Succulents <sup>( 1 )</sup></button>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- dream plant sec start -->
+    <section class="dream-plants mb-5">
+        <div class="container py-5">
+            <h4 style="color: #7fa15a;" data-aos="fade-up">Find your dream plants</h4>
+            <h2 class="fw-bold mb-5" data-aos="fade-up">New Summer Collection</h2>
+            <div class="row text-center" data-aos="fade-up">
+
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card product-card position-relative">
+                        <div class="position-relative">
+                            <img src="images/images18.jpg" class="card-img-top" alt="Product 2">
+                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+
+                            <!-- Hoverable Icon Dropdown -->
+                            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+                                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+                                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+                                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+                                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+                            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+                            <p class="fw-bold">$75.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card product-card position-relative">
+                        <div class="position-relative">
+                            <img src="images/images19.jpg" class="card-img-top" alt="Product 2">
+                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+
+                            <!-- Hoverable Icon Dropdown -->
+                            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+                                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+                                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+                                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+                                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+                            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+                            <p class="fw-bold">$75.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card product-card position-relative">
+                        <div class="position-relative">
+                            <img src="images/images20.jpg" class="card-img-top" alt="Product 2">
+                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+
+                            <!-- Hoverable Icon Dropdown -->
+                            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+                                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+                                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+                                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+                                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+                            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+                            <p class="fw-bold">$75.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card product-card position-relative">
+                        <div class="position-relative">
+                            <img src="images/images21.jpg" class="card-img-top" alt="Product 2">
+                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+
+                            <!-- Hoverable Icon Dropdown -->
+                            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+                                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+                                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+                                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+                                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+                            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+                            <p class="fw-bold">$75.00</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="container">
+                <div class="btn btn-outline-dark p-3  border border-1 btn-lg" type="button"><i class="fa fa-plus"
+                        aria-hidden="true"></i>
+                    Shop all plants</div>
+            </div>
+        </div>
+    </section>
+    <!-- dream plant sec end -->
+
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <section class="home-testimonial-bottom">
+            <div class="container testimonial-inner">
+                <h4 style="color: #7fa15a;" data-aos="fade-up">Welcome to Lustria</h4>
+                <h2 class="fw-bold mb-5" data-aos="fade-up">Testimonials</h2>
+                <h2 class=" text-dark fw-bold"></h2>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-4 style-3">
+                        <div class="tour-item ">
+                            <div class="tour-desc ">
+                                <div class="tour-text color-grey-3 text-center ">Your level of support and dedication is
+                                    second to none. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                    officia deseru mollita nccaecat cupidatat non owifn</div>
+                                <div class="d-flex justify-content-center pt-2 pb-2">
+                                    <img class="tm-people" src="images/testimonial-profile2.jpg" alt="">
+                                </div>
+                                <div class="link-name d-flex justify-content-center">Sally Ramsey</div>
+                                <div class="link-position d-flex justify-content-center"> / Reporter</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 style-3">
+                        <div class="tour-item ">
+                            <div class="tour-desc ">
+                                <div class="tour-text color-grey-3 text-center">Your level of support and dedication is
+                                    second to none. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                    officia deseru mollita nccaecat cupidatat non owifn</div>
+                                <div class="d-flex justify-content-center pt-2 pb-2"><img class="tm-people"
+                                        src="images/testimonial-profile2.jpg" alt=""></div>
+                                <div class="link-name d-flex justify-content-center">Sally Ramsey</div>
+                                <div class="link-position d-flex justify-content-center"> / Reporter</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 style-3">
+                        <div class="tour-item ">
+                            <div class="tour-desc ">
+                                <div class="tour-text color-grey-3 text-center">Your level of support and dedication is
+                                    second to none. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                    officia deseru mollita nccaecat cupidatat non owifn</div>
+                                <div class="d-flex justify-content-center pt-2 pb-2"><img class="tm-people"
+                                        src="images/testimonial-profile2.jpg" alt=""></div>
+                                <div class="link-name d-flex justify-content-center">Sally Ramsey</div>
+                                <div class="link-position d-flex justify-content-center"> / Reporter</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer class="footer text-light py-5">
+        <div class="container">
+            <div class="row ">
+
+                <div class="col-auto">
+                    <h3 style="color: #7fa15a;">Subscribe Us</h3>
+                    <h2 class="pt-2">
+
+                        Can we get in-touch<br> closer
+                    </h2>
+                </div>
+
+                <div class="col-md-5 col-12">
+                    <!-- Email input -->
+                    <div class="form-outline form-white mb-4">
+                        <input type="email" id="form5Example2" placeholder="your email address" class="footer-input" />
+
+                    </div>
+                </div>
+
+
+
+                <div class="col-auto">
+                    <!-- Submit button -->
+                    <button type="submit" class="subcription-btn p-3 ">
+                        Subscribe <i class="mx-2 fa fa-arrow-right fa-xl"></i>
+                    </button>
+                </div>
+
+            </div>
+            <hr class="text-muted my-4">
+            <div class="row p-4">
+                <div class="col-md-3">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="images/footer-logo.png" alt="Lustria" height="60" class="me-2">
+
+                    </div>
+                    <p class="text-muted">Can we get in-touch closer</p>
+                </div>
+                <div class="col-md-3">
+                    <h6 style="color: #7fa15a;"> <i class="fa fa-phone"></i> Phone:</h6>
+                    <p class="text-muted">Mobile (+00) 987 877 821</p>
+                    <p class="text-muted">Fax 678 912 1289 121</p>
+                </div>
+                <div class="col-md-3">
+                    <h6 style="color: #7fa15a;"><i class="fa fa-home"></i> Address:</h6>
+                    <p class="text-muted">No 40 Baria Street 15/2</p>
+                    <p class="text-muted">NewYork City, NY, United States.</p>
+                </div>
+                <div class="col-md-3">
+                    <h6 style="color: #7fa15a;"><i class="fa fa-message"></i> Email:</h6>
+                    <p class="text-muted">No 40 Baria Street 15/2</p>
+                    <p class="text-muted">NewYork City, NY, United States.</p>
+                </div>
+            </div>
+            <hr class="text-muted my-4">
+            <div class="d-flex justify-content-center align-items-center">
+
+
+                <p class="text-light">Copyright © 2022 Lustria. All Rights Reserved</p>
+
+            </div>
+
+        </div>
+
+
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+
+    </script>
+</body>
+
+</html>

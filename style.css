@@ -1,0 +1,643 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+  
+    line-height: 1.6;
+    color: #333;
+    font-family: "Crimson Text", serif;
+    font-weight: 650;
+    font-style: normal;
+}
+
+
+/* Header Top */
+
+.navbar{
+    height: 100px;
+}
+
+   /* Custom styles for dropdown hover */
+   .navbar .dropdown:hover .dropdown-menu {
+    display: block; 
+  }
+  .dropdown-menu {
+    margin-top: 0; 
+  }
+  
+  .navbar-nav {
+    justify-content: center;
+    flex: 1;
+  }
+.header-icons .icon {
+    margin-left: 15px;
+}
+.top-header-bg {
+    background-color: #7fa15a;
+}
+
+
+
+
+/* Hero Section */
+.hero {
+    background: url('https://via.placeholder.com/1200x500') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Products */
+.products .section-header {
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 40px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+}
+
+/* product button  */
+.btn-text {
+    color: black;
+}
+
+.btn-text:hover {
+    transform: scale(1.05);
+    color: #ababab;
+}
+
+/* dream plants section css */
+.dream-plants {
+    background: white;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+/* Testimonials  section css*/
+.testimonials {
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.home-testimonial h3 {
+    color: var(--orange);
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase
+}
+
+.testimonial-inner {
+    position: relative;
+    top: -174px
+}
+
+.testimonial-pos {
+    position: relative;
+    top: 24px
+}
+
+.testimonial-inner .tour-desc {
+    border-radius: 5px;
+    padding: 40px
+}
+
+.color-grey-3 {
+    font-family: "Montserrat", Sans-serif;
+    font-size: 14px;
+    color: #7e7e7e;
+}
+
+.testimonial-inner img.tm-people {
+    width: 100px;
+    height: 100px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    max-width: none
+}
+
+.link-name {
+    font-family: "Montserrat", Sans-serif;
+    font-size: 14px;
+    color: #6c83a2
+}
+
+.link-position {
+    font-family: "Montserrat", Sans-serif;
+    font-size: 12px;
+    color: #6c83a2
+}
+
+.testimonial {
+    margin: 1rem 0;
+}
+
+/* Footer */
+.footer{
+    background-color: #292929!important;
+}
+
+ .footer-input {
+    padding: 0.5rem;
+    display: flex;
+    border: none;
+    margin-right: 10px;
+    height: 63px;
+    color: #292929;
+    width: 100%;
+    margin-left: 70px;
+}
+
+ .subcription-btn {
+   width: 100%;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 18px;
+    height: 63px;
+    cursor: pointer;
+    padding-left: 100%;
+    padding-right: 100%;
+    margin-left: 60px;
+} 
+
+.subcription-btn:hover {
+    background: rgb(66, 58, 58);
+    color: white;
+}
+
+/* Footer */
+footer {
+    font-size: 0.9rem;
+  }
+  
+  footer h6 {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  
+  footer .fab {
+    font-size: 1.2rem;
+  }
+  
+  footer a {
+    transition: color 0.3s ease;
+  }
+  
+  footer a:hover {
+    color: #7fa15a !important;
+  }
+  
+  @media (max-width: 767.98px) {
+    footer .row {
+      text-align: center;
+    }
+  
+    footer .d-flex {
+      justify-content: center !important;
+    }
+  }
+
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* all plant shop cards css */
+
+
+.icon-dropdown {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+
+.product-card:hover .icon-dropdown {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.icon-dropdown {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.icon-dropdown a {
+    color: #333;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.icon-dropdown a:hover {
+    color: #007bff;
+}
+
+
+/* collection section btn */
+.container-btn {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.container-btn .btn {
+    position: absolute;
+    left: 30%;
+    bottom: 37px;
+    width: 75%;
+    font-size: 21px;
+    background-color: white;
+    color: black;
+    border: none;
+}
+
+.container-btn .btn:hover {
+    position: absolute;
+    left: 30%;
+    bottom: 37px;
+    width: 75%;
+    font-size: 21px;
+    background-color: #7fa15a;
+    color: white;
+    border: none;
+}
+
+
+.btn-small {
+    position: absolute;
+    left: 14%;
+    bottom: 37px;
+    width: 75%;
+    font-size: 18px;
+    background-color: white;
+    color: black;
+    border: none;
+}
+
+
+.container-btn .btn-small:hover {
+    position: absolute;
+    left: 14%;
+    bottom: 37px;
+    width: 75%;
+    font-size: 18px;
+    background-color: #7fa15a;
+    color: white;
+    border: none;
+}
+
+
+/* 404 page css */
+
+.error-page-input{
+    color: #777;
+    background-color: #fff !important;
+width: 30%;
+    padding-right: 40px;
+    padding: 0 20px;
+    line-height: 1;
+    max-width: 100%;
+    height: 50px;
+    outline: none;
+    border: 1px solid transparent;
+
+}
+
+.error-page-input:hover{
+    border: 1px solid #45a049;
+    color: #777;
+    background-color: #fff !important;
+width: 30%;
+    padding-right: 40px;
+    padding: 0 20px;
+    line-height: 1;
+    max-width: 100%;
+    height: 50px;
+    outline: none;
+}
+
+.error-search-btn{
+    color: #777;
+    background-color: #fff !important;
+    border: 1px solid transparent;
+    padding-right: 40px;
+    padding: 0 20px;
+    line-height: 1;
+    outline: none;
+}
+.error-search-btn:hover{
+    color: #777;
+    background-color: #fff !important;
+    padding-right: 40px;
+    padding: 0 20px;
+    line-height: 1;
+    outline: none;
+}
+
+.accordion-button{
+    background-color: white;
+    color: black !important;
+    font-weight: 500;
+}
+
+.accordion-button:hover{
+   color: white !important;
+   font-weight: 500;
+
+    background-color: #7fa15a;
+}
+
+
+
+/* our team */
+.responsive-cell-block {
+  min-height: 75px;
+}
+
+* {
+  font-family: Nunito, sans-serif;
+}
+
+.text-blk {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  line-height: 25px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+}
+
+.responsive-container-block {
+  min-height: 75px;
+  height: fit-content;
+  width: 100%;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0px;
+  margin-right: auto;
+  margin-bottom: 0px;
+  margin-left: auto;
+  justify-content: flex-start;
+}
+
+.outer-container {
+  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+
+}
+
+.heading-text {
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 35px;
+  color: rgb(51, 51, 51);
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 32px;
+  margin-left: 0px;
+  text-align: center;
+}
+
+.sub-heading-text {
+  max-width: 470px;
+  font-size: 25px;
+  line-height: 35px;
+  text-align: center;
+  font-weight: 700;
+  color: rgb(102, 102, 102);
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 100px;
+  margin-left: 0px;
+  margin: 0 0 70px 0;
+}
+
+.inner-container {
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
+  margin-right: 0px;
+  margin-bottom: 50px;
+  margin-left: 0px;
+}
+
+.cards-container {
+  max-width: 1320px;
+}
+
+.name {
+  font-size: 22px;
+  line-height: 35px;
+  font-weight: 700;
+  color: rgb(102, 102, 102);
+  margin-top: 0px;
+  margin-right: 0px;
+  text-align: center;
+  margin-bottom: 5px;
+  margin-left: 0px;
+}
+
+.position {
+  color: rgb(244, 152, 146);
+  font-size: 22px;
+  line-height: 35px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 20px;
+  margin-left: 0px;
+}
+
+.team-member-image {
+  width: 100%;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 40px;
+  margin-left: 0px;
+}
+
+.social-media-icon {
+  margin-top: 0px;
+  margin-right: 25px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  margin: 0 25px 10px 0;
+}
+
+.card-container {
+  padding-top: 0px;
+  padding-right: 25px;
+  padding-bottom: 0px;
+  padding-left: 25px;
+  margin: 0 0 30px 0;
+}
+
+@media (max-width: 1024px) {
+  .socialMediaIcons {
+    margin: 0 20px 10px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    margin: 0 0 60px 0;
+    width: 80%;
+  }
+
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .inner-container {
+    padding: 10px 0 10px 0;
+    margin: 50px 0 50px 0;
+  }
+
+  .cards-container {
+    padding: 10px 0 10px 0;
+  }
+
+  .card-container {
+    width: 100%;
+    padding: 0 15px 0 15px;
+  }
+
+  .outer-container {
+    padding: 10px 20px 10px 20px;
+  }
+
+  .sub-heading-text {
+    font-size: 20px;
+    line-height: 25px;
+    margin: 0 0 30px 0;
+  }
+
+  .heading-text {
+    font-size: 22px;
+    line-height: 28px;
+  }
+}
+
+.accordian-title{
+    color: #9b9b9b;
+   
+
+}
+
+.accordian-title:hover{
+    color: #7fa15a;
+}
+
+.accordion-button{
+ border-top: none;
+ border-right: none;
+ border-left: none;
+ border-bottom: 1px solid gray;
+
+}
+
+/* contact us */
+.contact-header {
+    padding: 60px 0;
+    text-align: center;
+
+}
+
+.contact-header h2 {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.contact-info {
+    padding: 40px 0;
+}
+
+.contact-info .info-box {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-info .info-box i {
+    color: #8bc34a;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.map-container {
+    margin: 20px 0;
+    height: 400px;
+}
+
+
+.contact-form textarea {
+    resize: none;
+    border: 1px solid transparent !important;
+    background-color: #f0eeee;
+}
+.contact-form :hover textarea  {
+    resize: none;
+    border: none;
+    border: 1px solid #8bc34a !important;
+}
+.contact-form input {
+    border: 1px solid transparent !important;
+    background-color: #f0eeee;
+}
+.contact-form :hover input {
+    border: 1px solid #8bc34a !important;
+
+}
+
+.dropdown-menu {
+    width: 150px;
+  }
