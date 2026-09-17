@@ -1,9 +1,11 @@
 /* ============================================================
-   LUSTRIA 2026 — PREMIUM ANIMATED UI
+   LUSTRIA 2026 — PREMIUM ANIMATED UI (FULL CSS)
+   Replace your entire style.css with this file
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
+/* ============ DESIGN TOKENS ============ */
 :root {
   --green-50:  #f0f7ec;
   --green-100: #d9ecd0;
@@ -86,6 +88,10 @@ a {
 
 ul {
   list-style: none;
+}
+
+button {
+  font-family: inherit;
 }
 
 ::selection {
@@ -523,6 +529,7 @@ ul {
   overflow: hidden;
   transition: var(--transition);
   box-shadow: 0 10px 30px -10px rgba(106, 173, 82, 0.6);
+  text-decoration: none;
 }
 .btn-primary-glow::before {
   content: '';
@@ -542,6 +549,8 @@ ul {
 .btn-primary-glow:hover::before { opacity: 1; }
 .btn-primary-glow i {
   transition: var(--transition);
+  position: relative;
+  z-index: 1;
 }
 .btn-primary-glow:hover i {
   transform: translateX(4px);
@@ -561,6 +570,7 @@ ul {
   border: 1.5px solid rgba(106, 173, 82, 0.25);
   cursor: pointer;
   transition: var(--transition);
+  text-decoration: none;
 }
 .btn-ghost:hover {
   background: var(--white);
@@ -783,6 +793,7 @@ ul {
   transition: var(--transition);
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 .filter-btn::before {
   content: '';
@@ -792,9 +803,8 @@ ul {
   transform: scaleX(0);
   transform-origin: left;
   transition: var(--transition);
-  z-index: 0;
+  z-index: -1;
 }
-.filter-btn span, .filter-btn { position: relative; }
 .filter-btn:hover {
   color: var(--dark);
   border-color: transparent;
