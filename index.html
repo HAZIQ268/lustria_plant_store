@@ -3,432 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lustria · Plant Shop (Animated UI)</title>
+  <title>Lustria · Plant Shop 2026</title>
 
-  <!-- Google Fonts for a modern, clean look -->
+  <!-- Premium Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- AOS (Animate On Scroll) -->
+  <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-  <!-- Bootstrap 5 (for grid, utilities, components) + Icons -->
+  <!-- Bootstrap 5 + Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <!-- Font Awesome (for some icons) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 
-  <style>
-    /* ---------- GLOBAL & ANIMATED UI TOKENS ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #fafcf8;   /* soft off-white with green touch */
-      color: #2c3e2b;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
-
-    /* smooth hover transitions everywhere */
-    a, button, .card, .btn, .icon-dropdown a, img {
-      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
-    }
-
-    /* ----- animated gradient keyframes ----- */
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-      100% { transform: translateY(0px); }
-    }
-
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    /* hero images gentle float */
-    .hero-sec img {
-      animation: float 6s ease-in-out infinite;
-      transition: transform 0.4s, box-shadow 0.4s;
-    }
-    .hero-sec img:hover {
-      transform: scale(1.01) translateY(-4px);
-      box-shadow: 0 25px 30px -12px rgba(70, 100, 70, 0.25) !important;
-    }
-
-    /* ----- header & nav refine ----- */
-    .top-header-bg {
-      background: #1b2e1b;  /* deep forest */
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .top-header-bg .nav-link i {
-      color: #d9e3d4;
-      font-size: 1rem;
-      transition: all 0.2s;
-    }
-    .top-header-bg .nav-link i:hover {
-      color: #b1d8a8;
-      transform: translateY(-2px) scale(1.1);
-    }
-    .dropdown-toggle {
-      color: #eef4ea !important;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-      border-radius: 30px;
-      padding: 0.4rem 1.2rem !important;
-      transition: all 0.2s;
-    }
-    .dropdown-toggle:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-1px);
-    }
-
-    /* main navbar */
-    .navbar {
-      background: #ffffffec !important;
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid #e1eedb;
-      padding: 0.8rem 0;
-      transition: all 0.3s;
-    }
-    .navbar-brand img {
-      height: 45px;
-      transition: transform 0.2s;
-    }
-    .navbar-brand img:hover {
-      transform: scale(1.02) rotate(-1deg);
-    }
-    .navbar-nav .nav-link {
-      font-weight: 500;
-      color: #2e4d2a !important;
-      margin: 0 2px;
-      border-radius: 30px;
-      padding: 0.6rem 1rem !important;
-      transition: all 0.25s;
-    }
-    .navbar-nav .nav-link:hover {
-      background: #e5f0df;
-      color: #1c3b1c !important;
-      transform: translateY(-2px);
-    }
-    .header-icons .nav-link {
-      font-size: 1.2rem;
-      padding: 0.6rem 0.9rem !important;
-      color: #355e35 !important;
-      border-radius: 50%;
-      transition: all 0.2s;
-    }
-    .header-icons .nav-link:hover {
-      background: #deecda;
-      transform: scale(1.1) translateY(-2px);
-    }
-
-    /* ----- SECTION HEADINGS & BUTTONS ----- */
-    .section-header {
-      display: flex;
-      justify-content: center;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-      margin: 2.5rem 0 1.5rem;
-    }
-    .btn-text {
-      background: #ffffff;
-      border: 1.5px solid #cbdcc4;
-      color: #2e4d2a;
-      font-weight: 600;
-      padding: 0.7rem 2rem;
-      border-radius: 60px;
-      letter-spacing: 0.3px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
-      transition: all 0.25s;
-    }
-    .btn-text:hover {
-      background: #558b4e;
-      border-color: #558b4e;
-      color: white;
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 12px 18px -8px rgba(72, 112, 72, 0.4);
-    }
-
-    /* ----- PRODUCT CARDS with ultra-animated hover ----- */
-    .product-card {
-      border: 1px solid #e2eedb;
-      border-radius: 22px;
-      overflow: hidden;
-      background: white;
-      box-shadow: 0 10px 20px -12px rgba(0, 0, 0, 0.08);
-      transition: all 0.4s cubic-bezier(0.15, 0.8, 0.3, 1);
-    }
-    .product-card:hover {
-      transform: translateY(-8px) scale(1.01);
-      box-shadow: 0 28px 30px -14px rgba(65, 100, 65, 0.3);
-      border-color: #b8d6ae;
-    }
-    .product-card img {
-      transition: transform 0.5s ease, filter 0.3s;
-      object-fit: cover;
-      height: 230px;
-      width: 100%;
-    }
-    .product-card:hover img {
-      transform: scale(1.05);
-      filter: brightness(1.02) saturate(1.05);
-    }
-
-    /* animated icon dropdown on cards */
-    .icon-dropdown {
-      opacity: 0;
-      transform: translateX(10px);
-      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
-      background: #ffffffdd;
-      backdrop-filter: blur(6px);
-      border-radius: 40px;
-      padding: 8px 6px;
-      box-shadow: 0 10px 18px -8px rgba(0, 0, 0, 0.2);
-    }
-    .product-card:hover .icon-dropdown {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .icon-dropdown a {
-      color: #2e4d2a;
-      font-size: 1.1rem;
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      transition: all 0.2s;
-    }
-    .icon-dropdown a:hover {
-      background: #558b4e;
-      color: white;
-      transform: scale(1.1) rotate(5deg);
-    }
-
-    /* ----- TESTIMONIAL CARDS ----- */
-    .tour-item {
-      background: #ffffff;
-      border-radius: 28px;
-      padding: 2rem 1.5rem;
-      box-shadow: 0 18px 25px -16px rgba(60, 90, 60, 0.2);
-      transition: all 0.4s;
-      border: 1px solid #e0efdb;
-      height: 100%;
-    }
-    .tour-item:hover {
-      transform: translateY(-8px) scale(1.01);
-      box-shadow: 0 28px 35px -18px #558b4e55;
-      border-color: #a6c79e;
-    }
-    .tm-people {
-      width: 70px;
-      height: 70px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid #e2f0dd;
-      transition: all 0.3s;
-    }
-    .tour-item:hover .tm-people {
-      border-color: #7fa15a;
-      transform: scale(1.05) rotate(2deg);
-    }
-
-    /* ----- FOOTER with subtle animation ----- */
-    .footer {
-      background: #182618;
-      color: #dfecda;
-      border-top: 4px solid #7fa15a;
-    }
-    .footer-input {
-      background: #2a3d2a;
-      border: 1px solid #3f5a3f;
-      border-radius: 60px;
-      padding: 0.9rem 1.8rem;
-      color: white;
-      width: 100%;
-      outline: none;
-      transition: all 0.3s;
-    }
-    .footer-input:focus {
-      background: #324e32;
-      border-color: #b1d8a8;
-      box-shadow: 0 0 0 5px #7fa15a33;
-    }
-    .subcription-btn {
-      background: #7fa15a;
-      border: none;
-      border-radius: 60px;
-      color: #0f1f0f;
-      font-weight: 700;
-      padding: 0.9rem 2.2rem;
-      transition: all 0.3s;
-    }
-    .subcription-btn:hover {
-      background: #9ec27c;
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 18px 20px -12px #7fa15a;
-    }
-
-    /* small tweaks for gallery buttons */
-    .container-btn .btn, .container-btn .btn-small {
-      background: #ffffffee;
-      backdrop-filter: blur(6px);
-      border: 1px solid #c2dbbc;
-      border-radius: 60px;
-      color: #1c3b1c;
-      font-weight: 600;
-      padding: 0.55rem 1.8rem;
-      transition: all 0.3s;
-      box-shadow: 0 6px 14px -6px rgba(0,0,0,0.1);
-      margin-top: -1.7rem;
-      position: relative;
-      z-index: 5;
-    }
-    .container-btn .btn:hover, .container-btn .btn-small:hover {
-      background: #7fa15a;
-      color: white;
-      border-color: #7fa15a;
-      transform: translateY(-4px);
-      box-shadow: 0 16px 22px -10px #558b4e;
-    }
-    .btn-outline-dark {
-      border-radius: 60px;
-      padding: 0.9rem 2.5rem;
-      font-weight: 600;
-      border: 2px solid #2e4d2a;
-      color: #2e4d2a;
-      background: transparent;
-      transition: all 0.3s;
-    }
-    .btn-outline-dark:hover {
-      background: #2e4d2a;
-      color: white;
-      transform: scale(1.03) translateY(-4px);
-      box-shadow: 0 20px 25px -12px #2e4d2a;
-    }
-
-    /* testimonial section background */
-    .home-testimonial-bottom {
-      background: #f4fbf1;
-      padding: 5rem 0;
-    }
-
-    /* price style */
-    .fw-bold {
-      color: #2d5e2d;
-    }
-
-    /* all sections have subtle reveal via AOS already */
-    .section-padding {
-      padding: 3rem 0;
-    }
-
-    /* responsive adjustments */
-    @media (max-width: 768px) {
-      .navbar-nav .nav-link {
-        padding: 0.5rem 0.8rem !important;
-      }
-      .hero-sec .row.mt-5 {
-        margin-top: 1rem !important;
-      }
-      .btn-text {
-        padding: 0.5rem 1.2rem;
-        font-size: 0.9rem;
-      }
-      .container-btn .btn, .container-btn .btn-small {
-        margin-top: -1.2rem;
-        padding: 0.4rem 1.2rem;
-        font-size: 0.8rem;
-      }
-    }
-
-    /* extra floating icons */
-    .fa, .bi, .fab {
-      transition: all 0.2s;
-    }
-    i:hover {
-      transform: translateY(-2px);
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+  <!-- ========== ANIMATED CURSOR GLOW ========== -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- ========== FLOATING PARTICLES BACKGROUND ========== -->
+  <div class="particles" id="particles"></div>
+
   <!-- ========== HEADER ========== -->
-  <header class="bg-light">
+  <header class="site-header">
     <!-- top bar -->
-    <nav class="py-2 top-header-bg border-bottom">
+    <nav class="top-bar">
       <div class="container d-flex flex-wrap align-items-center">
-        <ul class="nav me-auto">
-          <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i class="fab fa-facebook-f"></i></a></li>
-          <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i class="fab fa-instagram"></i></a></li>
-          <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i class="fab fa-twitter"></i></a></li>
-          <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i class="fab fa-youtube"></i></a></li>
+        <ul class="social-nav me-auto">
+          <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+          <li><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+          <li><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
         </ul>
 
-        <!-- USD dropdown -->
         <div class="dropdown">
-          <button class="text-white fw-bold mt-2 btn btn-transparent dropdown-toggle" type="button" id="currencyDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            USD
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="currencyDropdown">
-            <li><a class="dropdown-item" href="#">USD - US Dollar</a></li>
-            <li><a class="dropdown-item" href="#">EUR - Euro</a></li>
-            <li><a class="dropdown-item" href="#">GBP - Pound</a></li>
-            <li><a class="dropdown-item" href="#">JPY - Yen</a></li>
+          <button class="top-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">USD</button>
+          <ul class="dropdown-menu glass-dropdown">
+            <li><a class="dropdown-item" href="#">🇺🇸 USD - US Dollar</a></li>
+            <li><a class="dropdown-item" href="#">🇪🇺 EUR - Euro</a></li>
+            <li><a class="dropdown-item" href="#">🇬🇧 GBP - Pound</a></li>
+            <li><a class="dropdown-item" href="#">🇯🇵 JPY - Yen</a></li>
           </ul>
         </div>
 
-        <!-- language dropdown -->
-        <div class="dropdown mx-2">
-          <button class="text-white mt-2 fw-bold btn btn-transparent dropdown-toggle" type="button" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            EN
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="langDropdown">
-            <li><a class="dropdown-item" href="#">French</a></li>
-            <li><a class="dropdown-item" href="#">Spanish</a></li>
-            <li><a class="dropdown-item" href="#">Chinese</a></li>
-            <li><a class="dropdown-item" href="#">Japanese</a></li>
+        <div class="dropdown ms-3">
+          <button class="top-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">EN</button>
+          <ul class="dropdown-menu glass-dropdown">
+            <li><a class="dropdown-item" href="#">🇫🇷 French</a></li>
+            <li><a class="dropdown-item" href="#">🇪🇸 Spanish</a></li>
+            <li><a class="dropdown-item" href="#">🇨🇳 Chinese</a></li>
+            <li><a class="dropdown-item" href="#">🇯🇵 Japanese</a></li>
           </ul>
         </div>
       </div>
     </nav>
 
     <!-- main navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg main-nav" id="mainNav">
       <div class="container">
-        <a href="#" class="navbar-brand">
-          <!-- place holder for logo - using text fallback with image icon -->
-          <img src="https://placehold.co/200x60/2e4d2a/ffffff?text=Lustria" alt="Lustria" style="height: 45px;">
+        <a href="#" class="navbar-brand logo-brand">
+          <span class="logo-icon"><i class="bi bi-flower1"></i></span>
+          <span class="logo-text">Lustria</span>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span></span><span></span><span></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="shopDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-              <ul class="dropdown-menu" aria-labelledby="shopDropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Shop</a>
+              <ul class="dropdown-menu glass-dropdown">
                 <li><a class="dropdown-item" href="#">Indoor Plants</a></li>
                 <li><a class="dropdown-item" href="#">Outdoor Plants</a></li>
-                <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#">Pots & Planters</a></li>
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="#">All Categories</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Blogs</a></li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-              <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Pages</a>
+              <ul class="dropdown-menu glass-dropdown">
                 <li><a class="dropdown-item" href="#">About</a></li>
                 <li><a class="dropdown-item" href="#">Contact</a></li>
                 <li><a class="dropdown-item" href="#">Team</a></li>
@@ -437,10 +97,10 @@
             </li>
             <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
           </ul>
-          <div class="header-icons d-flex">
-            <a href="#" class="icon nav-link fa fa-search text-dark"></a>
-            <a href="#" class="icon nav-link fa fa-heart text-dark"></a>
-            <a href="#" class="icon nav-link fa fa-shopping-cart text-dark"></a>
+          <div class="header-icons">
+            <a href="#" class="icon-btn"><i class="bi bi-search"></i></a>
+            <a href="#" class="icon-btn"><i class="bi bi-heart"></i><span class="badge-dot">2</span></a>
+            <a href="#" class="icon-btn"><i class="bi bi-bag"></i><span class="badge-dot">5</span></a>
           </div>
         </div>
       </div>
@@ -448,423 +108,503 @@
   </header>
 
   <!-- ========== HERO SECTION ========== -->
-  <section id="hero" class="hero-sec section-padding">
-    <div class="container-fluid px-4">
-      <div class="row gx-5">
-        <div class="row mt-5">
-          <div class="col-lg-6 col-md-12 mb-4 mb-lg-0" data-aos="zoom-in" data-aos-delay="100">
-            <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=2070&auto=format&fit=crop" class="w-100 shadow-1-strong rounded mb-4 mx-3" style="border-radius: 30px !important; height: auto; object-fit: cover;" alt="Green plants">
+  <section class="hero-section">
+    <div class="hero-bg-gradient"></div>
+    <div class="container hero-container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
+          <div class="hero-content">
+            <span class="hero-badge"><i class="bi bi-stars"></i> 2026 New Collection</span>
+            <h1 class="hero-title">
+              Bring Nature <br>
+              <span class="gradient-text">Into Your Home</span>
+            </h1>
+            <p class="hero-desc">
+              Discover our curated collection of premium plants, handpicked to transform every corner of your space into a green sanctuary.
+            </p>
+            <div class="hero-actions">
+              <a href="#" class="btn-primary-glow">
+                Shop Now <i class="bi bi-arrow-right"></i>
+              </a>
+              <a href="#" class="btn-ghost">
+                <i class="bi bi-play-circle"></i> Watch Story
+              </a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat-item">
+                <h3 class="counter" data-target="2500">0</h3>
+                <p>Plants Sold</p>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <h3 class="counter" data-target="180">0</h3>
+                <p>Varieties</p>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <h3 class="counter" data-target="99">0</h3>
+                <p>% Happy</p>
+              </div>
+            </div>
           </div>
-          <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-left" data-aos-delay="200">
-            <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?q=80&w=2070&auto=format&fit=crop" class="w-100 shadow-1-strong rounded mb-4" style="border-radius: 30px !important; height: 335px; object-fit: cover;" alt="Boat on Calm Water">
-            <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2070&auto=format&fit=crop" class="w-100 shadow-1-strong rounded mb-4" style="border-radius: 30px !important; height: 335px; object-fit: cover;" alt="Waves at Sea">
+        </div>
+        <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
+          <div class="hero-visual">
+            <div class="hero-image-main float-anim">
+              <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2070&auto=format&fit=crop" alt="Main Plant">
+            </div>
+            <div class="hero-image-float hero-float-1 float-anim-slow">
+              <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?q=80&w=2070&auto=format&fit=crop" alt="Plant">
+            </div>
+            <div class="hero-image-float hero-float-2 float-anim-fast">
+              <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=2070&auto=format&fit=crop" alt="Plant">
+            </div>
+            <div class="hero-discount-card">
+              <div class="discount-icon"><i class="bi bi-tag-fill"></i></div>
+              <div>
+                <strong>50% OFF</strong>
+                <p>Summer Sale</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-dot"></div>
     </div>
   </section>
 
   <!-- ========== PRODUCTS FILTER ========== -->
-  <section class="products">
-    <div class="section-header" data-aos="fade-up">
-      <button class="border-0 btn-text">All Plants |</button>
-      <button class="border-0 btn-text">New Arrivals</button>
-      <button class="border-0 btn-text">| Sale</button>
+  <section class="filter-section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <h2 class="section-title">Explore Our <span class="gradient-text">Collection</span></h2>
+        <p class="section-subtitle">Premium plants for every space and mood</p>
+      </div>
+      <div class="filter-tabs" data-aos="fade-up" data-aos-delay="100">
+        <button class="filter-btn active" data-filter="all">All Plants</button>
+        <button class="filter-btn" data-filter="new">New Arrivals</button>
+        <button class="filter-btn" data-filter="sale">On Sale</button>
+        <button class="filter-btn" data-filter="popular">Popular</button>
+      </div>
     </div>
   </section>
 
-  <!-- ========== PRODUCTS GRID 1 ========== -->
-  <div class="container py-4">
-    <div class="row text-center" data-aos="fade-up">
-      <!-- product 1 -->
-      <div class="col-md-3 col-sm-6 mb-4">
-        <div class="card product-card position-relative">
-          <div class="position-relative">
-            <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
-            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-              <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-              <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-              <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-              <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+  <!-- ========== PRODUCTS GRID ========== -->
+  <section class="products-section">
+    <div class="container">
+      <div class="row g-4" data-aos="fade-up">
+        <!-- product 1 -->
+        <div class="col-lg-3 col-md-6">
+          <div class="product-card premium-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2070&auto=format&fit=crop" alt="Plant">
+              <span class="sale-badge">SALE</span>
+              <span class="wishlist-btn"><i class="bi bi-heart"></i></span>
+              <div class="card-actions">
+                <a href="#" class="action-btn" title="Add to Cart"><i class="bi bi-bag-plus"></i></a>
+                <a href="#" class="action-btn" title="Quick View"><i class="bi bi-eye"></i></a>
+                <a href="#" class="action-btn" title="Compare"><i class="bi bi-arrow-left-right"></i></a>
+              </div>
+            </div>
+            <div class="card-info">
+              <span class="card-category">Indoor</span>
+              <h5 class="card-title">Aliquam Lobortis</h5>
+              <div class="card-price">
+                <span class="old-price">$87.00</span>
+                <span class="new-price">$75.00</span>
+              </div>
+              <div class="card-rating">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
+              </div>
             </div>
           </div>
-          <div class="card-body">
-            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-            <p class="fw-bold">$75.00</p>
+        </div>
+        <!-- product 2 -->
+        <div class="col-lg-3 col-md-6">
+          <div class="product-card premium-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?q=80&w=2070&auto=format&fit=crop" alt="Plant">
+              <span class="sale-badge">SALE</span>
+              <span class="wishlist-btn"><i class="bi bi-heart"></i></span>
+              <div class="card-actions">
+                <a href="#" class="action-btn"><i class="bi bi-bag-plus"></i></a>
+                <a href="#" class="action-btn"><i class="bi bi-eye"></i></a>
+                <a href="#" class="action-btn"><i class="bi bi-arrow-left-right"></i></a>
+              </div>
+            </div>
+            <div class="card-info">
+              <span class="card-category">Outdoor</span>
+              <h5 class="card-title">Terrarium Mix</h5>
+              <div class="card-price">
+                <span class="old-price">$87.00</span>
+                <span class="new-price">$75.00</span>
+              </div>
+              <div class="card-rating">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- product 3 -->
+        <div class="col-lg-3 col-md-6">
+          <div class="product-card premium-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=2070&auto=format&fit=crop" alt="Plant">
+              <span class="sale-badge hot">HOT</span>
+              <span class="wishlist-btn"><i class="bi bi-heart"></i></span>
+              <div class="card-actions">
+                <a href="#" class="action-btn"><i class="bi bi-bag-plus"></i></a>
+                <a href="#" class="action-btn"><i class="bi bi-eye"></i></a>
+                <a href="#" class="action-btn"><i class="bi bi-arrow-left-right"></i></a>
+              </div>
+            </div>
+            <div class="card-info">
+              <span class="card-category">Succulent</span>
+              <h5 class="card-title">Desert Rose</h5>
+              <div class="card-price">
+                <span class="old-price">$87.00</span>
+                <span class="new-price">$75.00</span>
+              </div>
+              <div class="card-rating">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- product 4 -->
+        <div class="col-lg-3 col-md-6">
+          <div class="product-card premium-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=2070&auto=format&fit=crop" alt="Plant">
+              <span class="sale-badge">NEW</span>
+              <span class="wishlist-btn"><i class="bi bi-heart"></i></span>
+              <div class="card-actions">
+                <a href="#" class="action-btn"><i class="bi bi-bag-plus"></i></a>
+                <a href="#" class="action-btn"><i class="bi bi-eye"></i></a>
+                <a href="#" class="action-btn"><i class="bi bi-arrow-left-right"></i></a>
+              </div>
+            </div>
+            <div class="card-info">
+              <span class="card-category">Tropical</span>
+              <h5 class="card-title">Monstera Deliciosa</h5>
+              <div class="card-price">
+                <span class="old-price">$120.00</span>
+                <span class="new-price">$95.00</span>
+              </div>
+              <div class="card-rating">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- product 5 -->
+        <div class="col-lg-3 col-md-6">
+          <div class="product-card premium-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1509223197845-458d87318791?q=80&w=2070&auto=format&fit=crop" alt="Plant">
+              <span class="sale-badge">SALE</span>
+              <span class="wishlist-btn"><i class="bi bi-heart"></i></span>
+              <div class="card-actions">
+                <a href="#" class="action-btn"><i class="bi bi-bag-plus"></i></a>
+                <a href="#" class="action-btn"><i class="bi bi-eye"></i></a>
+                <a href="#" class="action-btn"><i class="bi bi-arrow-left-right"></i></a>
+              </div>
+            </div>
+            <div class="card-info">
+              <span class="card-category">Foliage</span>
+              <h5 class="card-title">Philodendron</h5>
+              <div class="card-price">
+                <span class="old-price">$99.00</span>
+                <span class="new-price">$69.00</span>
+              </div>
+              <div class="card-rating">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- product 6 -->
+        <div class="col-lg-3 col-md-6">
+          <div class="product-card premium-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2070&auto=format&fit=crop" alt="Plant">
+              <span class="sale-badge">SALE</span>
+              <span class="wishlist-btn"><i class="bi bi-heart"></i></span>
+              <div class="card-actions">
+                <a href="#" class="action-btn"><i class="bi bi-bag-plus"></i></a>
+                <a href="#" class="action-btn"><i class="bi bi-eye"></i></a>
+                <a href="#" class="action-btn"><i class="bi bi-arrow-left-right"></i></a>
+              </div>
+            </div>
+            <div class="card-info">
+              <span class="card-category">Indoor</span>
+              <h5 class="card-title">Snake Plant</h5>
+              <div class="card-price">
+                <span class="old-price">$87.00</span>
+                <span class="new-price">$75.00</span>
+              </div>
+              <div class="card-rating">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- product 7 -->
+        <div class="col-lg-3 col-md-6">
+          <div class="product-card premium-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?q=80&w=2070&auto=format&fit=crop" alt="Plant">
+              <span class="sale-badge hot">HOT</span>
+              <span class="wishlist-btn"><i class="bi bi-heart"></i></span>
+              <div class="card-actions">
+                <a href="#" class="action-btn"><i class="bi bi-bag-plus"></i></a>
+                <a href="#" class="action-btn"><i class="bi bi-eye"></i></a>
+                <a href="#" class="action-btn"><i class="bi bi-arrow-left-right"></i></a>
+              </div>
+            </div>
+            <div class="card-info">
+              <span class="card-category">Flowering</span>
+              <h5 class="card-title">Peace Lily</h5>
+              <div class="card-price">
+                <span class="old-price">$87.00</span>
+                <span class="new-price">$75.00</span>
+              </div>
+              <div class="card-rating">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- product 8 -->
+        <div class="col-lg-3 col-md-6">
+          <div class="product-card premium-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=2070&auto=format&fit=crop" alt="Plant">
+              <span class="sale-badge">NEW</span>
+              <span class="wishlist-btn"><i class="bi bi-heart"></i></span>
+              <div class="card-actions">
+                <a href="#" class="action-btn"><i class="bi bi-bag-plus"></i></a>
+                <a href="#" class="action-btn"><i class="bi bi-eye"></i></a>
+                <a href="#" class="action-btn"><i class="bi bi-arrow-left-right"></i></a>
+              </div>
+            </div>
+            <div class="card-info">
+              <span class="card-category">Hanging</span>
+              <h5 class="card-title">String of Pearls</h5>
+              <div class="card-price">
+                <span class="old-price">$87.00</span>
+                <span class="new-price">$75.00</span>
+              </div>
+              <div class="card-rating">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <!-- product 2 -->
-      <div class="col-md-3 col-sm-6 mb-4">
-        <div class="card product-card position-relative">
-          <div class="position-relative">
-            <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
-            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-              <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-              <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-              <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-              <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-            </div>
-          </div>
-          <div class="card-body">
-            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-            <p class="fw-bold">$75.00</p>
-          </div>
-        </div>
-      </div>
-      <!-- product 3 -->
-      <div class="col-md-3 col-sm-6 mb-4">
-        <div class="card product-card position-relative">
-          <div class="position-relative">
-            <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
-            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-              <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-              <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-              <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-              <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-            </div>
-          </div>
-          <div class="card-body">
-            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-            <p class="fw-bold">$75.00</p>
-          </div>
-        </div>
-      </div>
-      <!-- product 4 -->
-      <div class="col-md-3 col-sm-6 mb-4">
-        <div class="card product-card position-relative">
-          <div class="position-relative">
-            <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
-            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-              <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-              <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-              <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-              <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-            </div>
-          </div>
-          <div class="card-body">
-            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-            <p class="fw-bold">$75.00</p>
-          </div>
-        </div>
+      <div class="text-center mt-5" data-aos="fade-up">
+        <a href="#" class="btn-primary-glow">
+          <i class="bi bi-plus-circle"></i> Shop All Plants
+        </a>
       </div>
     </div>
-    <!-- second row -->
-    <div class="row text-center" data-aos="fade-up" data-aos-delay="100">
-      <div class="col-md-3 col-sm-6 mb-4">
-        <div class="card product-card position-relative">
-          <div class="position-relative">
-            <img src="https://images.unsplash.com/photo-1509223197845-458d87318791?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
-            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-              <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-              <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-              <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-              <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-            </div>
-          </div>
-          <div class="card-body">
-            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-            <p class="fw-bold">$75.00</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 mb-4">
-        <div class="card product-card position-relative">
-          <div class="position-relative">
-            <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
-            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-              <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-              <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-              <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-              <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-            </div>
-          </div>
-          <div class="card-body">
-            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-            <p class="fw-bold">$75.00</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 mb-4">
-        <div class="card product-card position-relative">
-          <div class="position-relative">
-            <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
-            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-              <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-              <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-              <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-              <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-            </div>
-          </div>
-          <div class="card-body">
-            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-            <p class="fw-bold">$75.00</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 mb-4">
-        <div class="card product-card position-relative">
-          <div class="position-relative">
-            <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
-            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-              <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-              <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-              <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-              <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-            </div>
-          </div>
-          <div class="card-body">
-            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-            <p class="fw-bold">$75.00</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  </section>
 
-  <!-- ========== NEW SUMMER COLLECTION GALLERY ========== -->
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 mb-4" data-aos="fade-up">
-        <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=2070&auto=format&fit=crop" class="card-img-top rounded-4" style="height: auto; object-fit: cover;" alt="Collection">
-        <div class="container-btn">
-          <button class="btn">Seeds <sup>( 1 )</sup></button>
-        </div>
-        <div class="row mt-4">
-          <div class="col-lg-6 col-md-12 mb-4 mb-lg-0" data-aos="fade-up">
-            <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?q=80&w=2070&auto=format&fit=crop" class="w-100 shadow-1-strong rounded mb-4" style="height: 300px; object-fit: cover; border-radius: 24px !important;" alt="Terrariums">
-            <div class="container-btn">
-              <button class="btn-small p-2">Terrariums <sup>( 1 )</sup></button>
-            </div>
-          </div>
-          <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
-            <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2070&auto=format&fit=crop" class="w-100 shadow-1-strong rounded mb-4" style="height: 300px; object-fit: cover; border-radius: 24px !important;" alt="House Plants">
-            <div class="container-btn">
-              <button class="btn-small p-2">House Plants <sup>( 9 )</sup></button>
-            </div>
-          </div>
-        </div>
+  <!-- ========== COLLECTIONS SHOWCASE ========== -->
+  <section class="collections-section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <h2 class="section-title">Shop by <span class="gradient-text">Category</span></h2>
+        <p class="section-subtitle">Find the perfect plants for your space</p>
       </div>
-
-      <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="150">
-        <div class="mb-4">
-          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=2070&auto=format&fit=crop" class="card-img-top rounded-4" style="height: 300px; width: 100%; object-fit: cover;" alt="Potter Plants">
-          <div class="container-btn">
-            <button class="btn">Potter Plants <sup>( 6 )</sup></button>
+      <div class="collections-grid">
+        <div class="collection-card large" data-aos="zoom-in">
+          <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2070&auto=format&fit=crop" alt="Seeds">
+          <div class="collection-overlay">
+            <span class="collection-count">12 Items</span>
+            <h3>Seeds & Bulbs</h3>
+            <a href="#" class="collection-link">Explore <i class="bi bi-arrow-right"></i></a>
           </div>
         </div>
-        <div>
-          <img src="https://images.unsplash.com/photo-1509223197845-458d87318791?q=80&w=2070&auto=format&fit=crop" class="card-img-top rounded-4" style="height: 300px; width: 100%; object-fit: cover;" alt="Succulents">
-          <div class="container-btn">
-            <button class="btn">Succulents <sup>( 1 )</sup></button>
+        <div class="collection-card" data-aos="zoom-in" data-aos-delay="100">
+          <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?q=80&w=2070&auto=format&fit=crop" alt="Terrariums">
+          <div class="collection-overlay">
+            <span class="collection-count">8 Items</span>
+            <h3>Terrariums</h3>
+            <a href="#" class="collection-link">Explore <i class="bi bi-arrow-right"></i></a>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ========== DREAM PLANTS / NEW SUMMER ========== -->
-  <section class="dream-plants mb-5">
-    <div class="container py-5">
-      <h4 style="color: #7fa15a;" data-aos="fade-up">Find your dream plants</h4>
-      <h2 class="fw-bold mb-5" data-aos="fade-up" data-aos-delay="100">New Summer Collection</h2>
-      <div class="row text-center" data-aos="fade-up" data-aos-delay="150">
-        <!-- product cards same style, repeated for consistency -->
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card product-card position-relative">
-            <div class="position-relative">
-              <img src="https://images.unsplash.com/photo-1509223197845-458d87318791?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
-              <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-              <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-              </div>
-            </div>
-            <div class="card-body">
-              <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-              <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-              <p class="fw-bold">$75.00</p>
-            </div>
+        <div class="collection-card" data-aos="zoom-in" data-aos-delay="150">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=2070&auto=format&fit=crop" alt="Potter Plants">
+          <div class="collection-overlay">
+            <span class="collection-count">24 Items</span>
+            <h3>Potter Plants</h3>
+            <a href="#" class="collection-link">Explore <i class="bi bi-arrow-right"></i></a>
           </div>
         </div>
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card product-card position-relative">
-            <div class="position-relative">
-              <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
-              <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-              <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-              </div>
-            </div>
-            <div class="card-body">
-              <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-              <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-              <p class="fw-bold">$75.00</p>
-            </div>
+        <div class="collection-card" data-aos="zoom-in" data-aos-delay="200">
+          <img src="https://images.unsplash.com/photo-1509223197845-458d87318791?q=80&w=2070&auto=format&fit=crop" alt="Succulents">
+          <div class="collection-overlay">
+            <span class="collection-count">16 Items</span>
+            <h3>Succulents</h3>
+            <a href="#" class="collection-link">Explore <i class="bi bi-arrow-right"></i></a>
           </div>
         </div>
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card product-card position-relative">
-            <div class="position-relative">
-              <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
-              <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-              <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-              </div>
-            </div>
-            <div class="card-body">
-              <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-              <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-              <p class="fw-bold">$75.00</p>
-            </div>
+        <div class="collection-card" data-aos="zoom-in" data-aos-delay="250">
+          <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=2070&auto=format&fit=crop" alt="House Plants">
+          <div class="collection-overlay">
+            <span class="collection-count">32 Items</span>
+            <h3>House Plants</h3>
+            <a href="#" class="collection-link">Explore <i class="bi bi-arrow-right"></i></a>
           </div>
-        </div>
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card product-card position-relative">
-            <div class="position-relative">
-              <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
-              <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-              <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-              </div>
-            </div>
-            <div class="card-body">
-              <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-              <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-              <p class="fw-bold">$75.00</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="text-center mt-3" data-aos="fade-up">
-        <div class="btn btn-outline-dark p-3 border border-1 btn-lg">
-          <i class="fa fa-plus me-2"></i> Shop all plants
         </div>
       </div>
     </div>
   </section>
 
   <!-- ========== TESTIMONIALS ========== -->
-  <section class="testimonials">
-    <section class="home-testimonial-bottom">
-      <div class="container testimonial-inner">
-        <h4 style="color: #7fa15a;" data-aos="fade-up">Welcome to Lustria</h4>
-        <h2 class="fw-bold mb-5" data-aos="fade-up" data-aos-delay="100">Testimonials</h2>
-        <div class="row d-flex justify-content-center">
-          <div class="col-md-4 style-3" data-aos="fade-up" data-aos-delay="150">
-            <div class="tour-item">
-              <div class="tour-desc">
-                <div class="tour-text color-grey-3 text-center">Your level of support and dedication is second to none. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollita nccaecat cupidatat non owifn</div>
-                <div class="d-flex justify-content-center pt-2 pb-2">
-                  <img class="tm-people" src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
-                </div>
-                <div class="link-name d-flex justify-content-center">Sally Ramsey</div>
-                <div class="link-position d-flex justify-content-center"> / Reporter</div>
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-label">Testimonials</span>
+        <h2 class="section-title">Loved by <span class="gradient-text">Plant Lovers</span></h2>
+        <p class="section-subtitle">Real stories from our green community</p>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="testimonial-card">
+            <div class="quote-icon"><i class="bi bi-quote"></i></div>
+            <p class="testimonial-text">Absolutely stunning quality! My plants arrived perfectly packaged and are thriving. The team truly cares about what they do.</p>
+            <div class="testimonial-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            </div>
+            <div class="testimonial-author">
+              <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sally">
+              <div>
+                <strong>Sally Ramsey</strong>
+                <span>Interior Designer</span>
               </div>
             </div>
           </div>
-          <div class="col-md-4 style-3" data-aos="fade-up" data-aos-delay="200">
-            <div class="tour-item">
-              <div class="tour-desc">
-                <div class="tour-text color-grey-3 text-center">Your level of support and dedication is second to none. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollita nccaecat cupidatat non owifn</div>
-                <div class="d-flex justify-content-center pt-2 pb-2">
-                  <img class="tm-people" src="https://randomuser.me/api/portraits/women/68.jpg" alt="">
-                </div>
-                <div class="link-name d-flex justify-content-center">Sally Ramsey</div>
-                <div class="link-position d-flex justify-content-center"> / Reporter</div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150">
+          <div class="testimonial-card featured">
+            <div class="quote-icon"><i class="bi bi-quote"></i></div>
+            <p class="testimonial-text">Best plant shop experience ever! The variety is unmatched, and the customer service is incredibly responsive and helpful.</p>
+            <div class="testimonial-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            </div>
+            <div class="testimonial-author">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma">
+              <div>
+                <strong>Emma Watson</strong>
+                <span>Plant Enthusiast</span>
               </div>
             </div>
           </div>
-          <div class="col-md-4 style-3" data-aos="fade-up" data-aos-delay="250">
-            <div class="tour-item">
-              <div class="tour-desc">
-                <div class="tour-text color-grey-3 text-center">Your level of support and dedication is second to none. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollita nccaecat cupidatat non owifn</div>
-                <div class="d-flex justify-content-center pt-2 pb-2">
-                  <img class="tm-people" src="https://randomuser.me/api/portraits/women/32.jpg" alt="">
-                </div>
-                <div class="link-name d-flex justify-content-center">Sally Ramsey</div>
-                <div class="link-position d-flex justify-content-center"> / Reporter</div>
+        </div>
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="testimonial-card">
+            <div class="quote-icon"><i class="bi bi-quote"></i></div>
+            <p class="testimonial-text">I've ordered 6 plants so far and every single one has been healthy and beautiful. Highly recommend to any plant lover!</p>
+            <div class="testimonial-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
+            </div>
+            <div class="testimonial-author">
+              <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Aisha">
+              <div>
+                <strong>Aisha Khan</strong>
+                <span>Home Decorator</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+
+  <!-- ========== NEWSLETTER CTA ========== -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-box" data-aos="zoom-in">
+        <div class="newsletter-bg"></div>
+        <div class="newsletter-content">
+          <span class="hero-badge"><i class="bi bi-envelope-paper"></i> Join the Club</span>
+          <h2>Get <span class="gradient-text">15% Off</span> Your First Order</h2>
+          <p>Subscribe to our newsletter for exclusive deals, plant care tips, and early access to new arrivals.</p>
+          <form class="newsletter-form" onsubmit="event.preventDefault();">
+            <div class="input-wrap">
+              <i class="bi bi-envelope"></i>
+              <input type="email" placeholder="Enter your email address" required>
+            </div>
+            <button type="submit" class="btn-primary-glow">
+              Subscribe <i class="bi bi-arrow-right"></i>
+            </button>
+          </form>
+          <p class="form-note"><i class="bi bi-shield-check"></i> We respect your privacy. Unsubscribe anytime.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ========== FOOTER ========== -->
-  <footer class="footer text-light py-5">
+  <footer class="site-footer">
+    <div class="footer-glow"></div>
     <div class="container">
-      <div class="row align-items-center">
-        <div class="col-auto" data-aos="fade-right">
-          <h3 style="color: #7fa15a;">Subscribe Us</h3>
-          <h2 class="pt-2">Can we get in-touch<br> closer</h2>
-        </div>
-        <div class="col-md-5 col-12" data-aos="fade-up">
-          <div class="form-outline form-white mb-4">
-            <input type="email" id="form5Example2" placeholder="your email address" class="footer-input" />
+      <div class="row g-4 footer-top">
+        <div class="col-lg-4 col-md-6">
+          <a href="#" class="footer-logo">
+            <span class="logo-icon"><i class="bi bi-flower1"></i></span>
+            <span class="logo-text">Lustria</span>
+          </a>
+          <p class="footer-desc">Premium plants for modern spaces. Bringing nature closer to you since 2020.</p>
+          <div class="footer-socials">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
           </div>
         </div>
-        <div class="col-auto" data-aos="fade-left">
-          <button type="submit" class="subcription-btn p-3">
-            Subscribe <i class="mx-2 fa fa-arrow-right fa-xl"></i>
-          </button>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6 class="footer-title">Shop</h6>
+          <ul class="footer-links">
+            <li><a href="#">Indoor Plants</a></li>
+            <li><a href="#">Outdoor Plants</a></li>
+            <li><a href="#">Pots & Planters</a></li>
+            <li><a href="#">Seeds</a></li>
+            <li><a href="#">Sale</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6 class="footer-title">Company</h6>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h6 class="footer-title">Get in Touch</h6>
+          <ul class="footer-contact">
+            <li><i class="bi bi-geo-alt"></i> No 40 Baria Street 15/2, New York City, NY</li>
+            <li><i class="bi bi-telephone"></i> (+00) 987 877 821</li>
+            <li><i class="bi bi-envelope"></i> hello@lustria.com</li>
+            <li><i class="bi bi-clock"></i> Mon - Sat: 9AM - 8PM</li>
+          </ul>
         </div>
       </div>
-      <hr class="text-muted my-4">
-      <div class="row p-4">
-        <div class="col-md-3" data-aos="fade-up">
-          <div class="d-flex align-items-center mb-3">
-            <img src="https://placehold.co/200x60/2e4d2a/ffffff?text=Lustria" alt="Lustria" height="60" class="me-2" style="border-radius: 12px;">
-          </div>
-          <p class="text-muted">Can we get in-touch closer</p>
+      <div class="footer-bottom">
+        <p>© 2026 Lustria. All Rights Reserved. Crafted with <i class="bi bi-heart-fill"></i> for plant lovers.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookies</a>
         </div>
-        <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
-          <h6 style="color: #7fa15a;"><i class="fa fa-phone me-2"></i>Phone:</h6>
-          <p class="text-muted">Mobile (+00) 987 877 821</p>
-          <p class="text-muted">Fax 678 912 1289 121</p>
-        </div>
-        <div class="col-md-3" data-aos="fade-up" data-aos-delay="150">
-          <h6 style="color: #7fa15a;"><i class="fa fa-home me-2"></i>Address:</h6>
-          <p class="text-muted">No 40 Baria Street 15/2</p>
-          <p class="text-muted">NewYork City, NY, United States.</p>
-        </div>
-        <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
-          <h6 style="color: #7fa15a;"><i class="fa fa-message me-2"></i>Email:</h6>
-          <p class="text-muted">No 40 Baria Street 15/2</p>
-          <p class="text-muted">NewYork City, NY, United States.</p>
-        </div>
-      </div>
-      <hr class="text-muted my-4">
-      <div class="d-flex justify-content-center align-items-center">
-        <p class="text-light mb-0">Copyright © 2022 Lustria. All Rights Reserved</p>
       </div>
     </div>
   </footer>
@@ -873,23 +613,74 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // Initialize AOS with a smooth, responsive feel
+    // AOS Init
     AOS.init({
       duration: 1000,
       once: true,
-      easing: 'ease-out-quad',
-      offset: 40,
+      easing: 'ease-out-cubic',
+      offset: 50,
     });
 
-    // Optional: small parallax or extra hover polish (not needed, already smooth)
-    // But we can add a tiny effect: navbar shadow on scroll
-    window.addEventListener('scroll', function() {
-      const navbar = document.querySelector('.navbar');
-      if (window.scrollY > 50) {
-        navbar.style.boxShadow = '0 8px 20px -10px rgba(0, 0, 0, 0.1)';
+    // ========== CURSOR GLOW ==========
+    const cursorGlow = document.getElementById('cursorGlow');
+    document.addEventListener('mousemove', (e) => {
+      cursorGlow.style.left = e.clientX + 'px';
+      cursorGlow.style.top = e.clientY + 'px';
+    });
+
+    // ========== NAVBAR SCROLL EFFECT ==========
+    const mainNav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        mainNav.classList.add('scrolled');
       } else {
-        navbar.style.boxShadow = 'none';
+        mainNav.classList.remove('scrolled');
       }
+    });
+
+    // ========== COUNTER ANIMATION ==========
+    const counters = document.querySelectorAll('.counter');
+    const animateCounter = (el) => {
+      const target = +el.getAttribute('data-target');
+      const duration = 2000;
+      const start = performance.now();
+      const update = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(eased * target).toLocaleString() + (target === 99 ? '%' : '+');
+        if (progress < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
+    };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => observer.observe(c));
+
+    // ========== FLOATING PARTICLES ==========
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 25; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+      p.style.animationDelay = (Math.random() * 10) + 's';
+      p.style.width = p.style.height = (Math.random() * 8 + 4) + 'px';
+      p.style.opacity = Math.random() * 0.5 + 0.2;
+      particlesContainer.appendChild(p);
+    }
+
+    // ========== FILTER TABS ==========
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
     });
   </script>
 </body>
