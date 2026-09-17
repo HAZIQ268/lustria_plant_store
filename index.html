@@ -1,676 +1,896 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lustria - Plant Shop</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lustria · Plant Shop (Animated UI)</title>
 
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Google Fonts for a modern, clean look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
 
-    <!-- bootstrap icon -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- fontawesome icon cdn -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
-        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />     
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- AOS (Animate On Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Bootstrap 5 (for grid, utilities, components) + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Font Awesome (for some icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css">
+  <style>
+    /* ---------- GLOBAL & ANIMATED UI TOKENS ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fafcf8;   /* soft off-white with green touch */
+      color: #2c3e2b;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* smooth hover transitions everywhere */
+    a, button, .card, .btn, .icon-dropdown a, img {
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    /* ----- animated gradient keyframes ----- */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* hero images gentle float */
+    .hero-sec img {
+      animation: float 6s ease-in-out infinite;
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+    .hero-sec img:hover {
+      transform: scale(1.01) translateY(-4px);
+      box-shadow: 0 25px 30px -12px rgba(70, 100, 70, 0.25) !important;
+    }
+
+    /* ----- header & nav refine ----- */
+    .top-header-bg {
+      background: #1b2e1b;  /* deep forest */
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .top-header-bg .nav-link i {
+      color: #d9e3d4;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .top-header-bg .nav-link i:hover {
+      color: #b1d8a8;
+      transform: translateY(-2px) scale(1.1);
+    }
+    .dropdown-toggle {
+      color: #eef4ea !important;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      border-radius: 30px;
+      padding: 0.4rem 1.2rem !important;
+      transition: all 0.2s;
+    }
+    .dropdown-toggle:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-1px);
+    }
+
+    /* main navbar */
+    .navbar {
+      background: #ffffffec !important;
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #e1eedb;
+      padding: 0.8rem 0;
+      transition: all 0.3s;
+    }
+    .navbar-brand img {
+      height: 45px;
+      transition: transform 0.2s;
+    }
+    .navbar-brand img:hover {
+      transform: scale(1.02) rotate(-1deg);
+    }
+    .navbar-nav .nav-link {
+      font-weight: 500;
+      color: #2e4d2a !important;
+      margin: 0 2px;
+      border-radius: 30px;
+      padding: 0.6rem 1rem !important;
+      transition: all 0.25s;
+    }
+    .navbar-nav .nav-link:hover {
+      background: #e5f0df;
+      color: #1c3b1c !important;
+      transform: translateY(-2px);
+    }
+    .header-icons .nav-link {
+      font-size: 1.2rem;
+      padding: 0.6rem 0.9rem !important;
+      color: #355e35 !important;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+    .header-icons .nav-link:hover {
+      background: #deecda;
+      transform: scale(1.1) translateY(-2px);
+    }
+
+    /* ----- SECTION HEADINGS & BUTTONS ----- */
+    .section-header {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin: 2.5rem 0 1.5rem;
+    }
+    .btn-text {
+      background: #ffffff;
+      border: 1.5px solid #cbdcc4;
+      color: #2e4d2a;
+      font-weight: 600;
+      padding: 0.7rem 2rem;
+      border-radius: 60px;
+      letter-spacing: 0.3px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
+      transition: all 0.25s;
+    }
+    .btn-text:hover {
+      background: #558b4e;
+      border-color: #558b4e;
+      color: white;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 18px -8px rgba(72, 112, 72, 0.4);
+    }
+
+    /* ----- PRODUCT CARDS with ultra-animated hover ----- */
+    .product-card {
+      border: 1px solid #e2eedb;
+      border-radius: 22px;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 10px 20px -12px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.15, 0.8, 0.3, 1);
+    }
+    .product-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 28px 30px -14px rgba(65, 100, 65, 0.3);
+      border-color: #b8d6ae;
+    }
+    .product-card img {
+      transition: transform 0.5s ease, filter 0.3s;
+      object-fit: cover;
+      height: 230px;
+      width: 100%;
+    }
+    .product-card:hover img {
+      transform: scale(1.05);
+      filter: brightness(1.02) saturate(1.05);
+    }
+
+    /* animated icon dropdown on cards */
+    .icon-dropdown {
+      opacity: 0;
+      transform: translateX(10px);
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
+      background: #ffffffdd;
+      backdrop-filter: blur(6px);
+      border-radius: 40px;
+      padding: 8px 6px;
+      box-shadow: 0 10px 18px -8px rgba(0, 0, 0, 0.2);
+    }
+    .product-card:hover .icon-dropdown {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .icon-dropdown a {
+      color: #2e4d2a;
+      font-size: 1.1rem;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+    .icon-dropdown a:hover {
+      background: #558b4e;
+      color: white;
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    /* ----- TESTIMONIAL CARDS ----- */
+    .tour-item {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 18px 25px -16px rgba(60, 90, 60, 0.2);
+      transition: all 0.4s;
+      border: 1px solid #e0efdb;
+      height: 100%;
+    }
+    .tour-item:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 28px 35px -18px #558b4e55;
+      border-color: #a6c79e;
+    }
+    .tm-people {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #e2f0dd;
+      transition: all 0.3s;
+    }
+    .tour-item:hover .tm-people {
+      border-color: #7fa15a;
+      transform: scale(1.05) rotate(2deg);
+    }
+
+    /* ----- FOOTER with subtle animation ----- */
+    .footer {
+      background: #182618;
+      color: #dfecda;
+      border-top: 4px solid #7fa15a;
+    }
+    .footer-input {
+      background: #2a3d2a;
+      border: 1px solid #3f5a3f;
+      border-radius: 60px;
+      padding: 0.9rem 1.8rem;
+      color: white;
+      width: 100%;
+      outline: none;
+      transition: all 0.3s;
+    }
+    .footer-input:focus {
+      background: #324e32;
+      border-color: #b1d8a8;
+      box-shadow: 0 0 0 5px #7fa15a33;
+    }
+    .subcription-btn {
+      background: #7fa15a;
+      border: none;
+      border-radius: 60px;
+      color: #0f1f0f;
+      font-weight: 700;
+      padding: 0.9rem 2.2rem;
+      transition: all 0.3s;
+    }
+    .subcription-btn:hover {
+      background: #9ec27c;
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 18px 20px -12px #7fa15a;
+    }
+
+    /* small tweaks for gallery buttons */
+    .container-btn .btn, .container-btn .btn-small {
+      background: #ffffffee;
+      backdrop-filter: blur(6px);
+      border: 1px solid #c2dbbc;
+      border-radius: 60px;
+      color: #1c3b1c;
+      font-weight: 600;
+      padding: 0.55rem 1.8rem;
+      transition: all 0.3s;
+      box-shadow: 0 6px 14px -6px rgba(0,0,0,0.1);
+      margin-top: -1.7rem;
+      position: relative;
+      z-index: 5;
+    }
+    .container-btn .btn:hover, .container-btn .btn-small:hover {
+      background: #7fa15a;
+      color: white;
+      border-color: #7fa15a;
+      transform: translateY(-4px);
+      box-shadow: 0 16px 22px -10px #558b4e;
+    }
+    .btn-outline-dark {
+      border-radius: 60px;
+      padding: 0.9rem 2.5rem;
+      font-weight: 600;
+      border: 2px solid #2e4d2a;
+      color: #2e4d2a;
+      background: transparent;
+      transition: all 0.3s;
+    }
+    .btn-outline-dark:hover {
+      background: #2e4d2a;
+      color: white;
+      transform: scale(1.03) translateY(-4px);
+      box-shadow: 0 20px 25px -12px #2e4d2a;
+    }
+
+    /* testimonial section background */
+    .home-testimonial-bottom {
+      background: #f4fbf1;
+      padding: 5rem 0;
+    }
+
+    /* price style */
+    .fw-bold {
+      color: #2d5e2d;
+    }
+
+    /* all sections have subtle reveal via AOS already */
+    .section-padding {
+      padding: 3rem 0;
+    }
+
+    /* responsive adjustments */
+    @media (max-width: 768px) {
+      .navbar-nav .nav-link {
+        padding: 0.5rem 0.8rem !important;
+      }
+      .hero-sec .row.mt-5 {
+        margin-top: 1rem !important;
+      }
+      .btn-text {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.9rem;
+      }
+      .container-btn .btn, .container-btn .btn-small {
+        margin-top: -1.2rem;
+        padding: 0.4rem 1.2rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* extra floating icons */
+    .fa, .bi, .fab {
+      transition: all 0.2s;
+    }
+    i:hover {
+      transform: translateY(-2px);
+    }
+  </style>
 </head>
 
 <body>
-    <!-- Header Section -->
 
-    <header class="bg-light">
-        <nav class="py-2 top-header-bg border-bottom">
-            <div class="container d-flex flex-wrap">
-                <ul class="nav me-auto">
-                    <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i
-                                class="fab fa-facebook-f"></i></a></li>
-                    <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i
-                                class="fab fa-instagram"></i></a></li>
-                    <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i class="fab fa-twitter"></i></a>
-                    </li>
-                    <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i class="fab fa-youtube"></i></a>
-                    </li>
-                </ul>
-               
-                <div class="dropdown">
-                    <button class="text-white fw-bold mt-2 btn btn-transparent dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                      USD
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                      <li><a class="dropdown-item" href="#">USD - US Dollar</a></li>
-                      <li><a class="dropdown-item" href="#">USD - US Dollar</a></li>
-                      <li><a class="dropdown-item" href="#">USD - US Dollar</a></li>
-                      <li><a class="dropdown-item" href="#">USD - US Dollar</a></li>
-                    
-                    </ul>
-                  </div>
-                <div class="dropdown mx-2">
-                    <button class="text-white mt-2 fw-bold btn btn-transparent  dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                      EN
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                      <li><a class="dropdown-item" href="#">French</a></li>
-                      <li><a class="dropdown-item" href="#">Spanish</a></li>
-                      <li><a class="dropdown-item" href="#">Chinese</a></li>
-                      <li><a class="dropdown-item" href="#">Japanese</a></li>
-                    </ul>
-                  </div>
-              
-            </div>
-        </nav>
+  <!-- ========== HEADER ========== -->
+  <header class="bg-light">
+    <!-- top bar -->
+    <nav class="py-2 top-header-bg border-bottom">
+      <div class="container d-flex flex-wrap align-items-center">
+        <ul class="nav me-auto">
+          <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i class="fab fa-facebook-f"></i></a></li>
+          <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i class="fab fa-instagram"></i></a></li>
+          <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i class="fab fa-twitter"></i></a></li>
+          <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i class="fab fa-youtube"></i></a></li>
+        </ul>
 
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container">
-                <div class="logo">
-                    <a href="#" class="navbar-brand"><img src="images/logo.png" alt="Logo"
-                            style="height: 40px;"></a>
-                </div>
-                <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Shop
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Category 1</a>
-                                <a class="dropdown-item" href="#">Category 2</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Category 3</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">All Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Blogs</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Pages
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="about.html">About</a>
-                                <a class="dropdown-item" href="contact.html">Contact</a>
-                                <a class="dropdown-item" href="team-members.html">Team Members</a>
-                                <a class="dropdown-item" href="coming-soon.html">Coming soon </a>
-                                <a class="dropdown-item" href="faq.html">Faq</a>
-                                <a class="dropdown-item" href="404-page.html">404 page</a>
-
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
-                        </li>
-                    </ul>
-                    <div class="header-icons">
-                        <a href="#" class="icon nav-link fa fa-search text-dark"></a>
-
-                    </div>
-                    <div class="header-icons">
-                        <a href="#" class="icon nav-link fa fa-heart text-dark"></a>
-
-                    </div>
-                    <div class="header-icons">
-                        <a href="#" class="icon nav-link fa fa-shopping-cart text-dark" aria-hidden="true"></a>
-
-                    </div>
-
-
-                </div>
-            </div>
-        </nav>
-    </header>
-
-
-    <!-- Hero Section Start-->
-    <section id="hero" class="hero-sec section-padding">
-        <div class="container-fluid">
-            <div class="row gx-5">
-                <div class="row mt-5">
-                    <div class="col-lg-6 col-md-12 mb-4 mb-lg-0 " data-aos="zoom-in">
-
-
-                        <img src="images/banner1.jpg" class="w-100 shadow-1-strong rounded mb-4 mx-3" width="100%"
-                            height="auto" alt="Wintry Mountain Landscape" />
-
-                    </div>
-
-
-                    <div class="col-lg-6 mb-4 mb-lg-0">
-
-                        <img src="images/banner2.jpg" class="w-100 shadow-1-strong rounded mb-4" width="100%"
-                            height="335px" alt="Boat on Calm Water" />
-
-                        <img src="images/banner2.jpg" class="w-100 shadow-1-strong rounded mb-4" width="100%"
-                            height="335px" alt="Waves at Sea" />
-                    </div>
-
-
-                </div>
-
-
-            </div>
+        <!-- USD dropdown -->
+        <div class="dropdown">
+          <button class="text-white fw-bold mt-2 btn btn-transparent dropdown-toggle" type="button" id="currencyDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            USD
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="currencyDropdown">
+            <li><a class="dropdown-item" href="#">USD - US Dollar</a></li>
+            <li><a class="dropdown-item" href="#">EUR - Euro</a></li>
+            <li><a class="dropdown-item" href="#">GBP - Pound</a></li>
+            <li><a class="dropdown-item" href="#">JPY - Yen</a></li>
+          </ul>
         </div>
+
+        <!-- language dropdown -->
+        <div class="dropdown mx-2">
+          <button class="text-white mt-2 fw-bold btn btn-transparent dropdown-toggle" type="button" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            EN
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="langDropdown">
+            <li><a class="dropdown-item" href="#">French</a></li>
+            <li><a class="dropdown-item" href="#">Spanish</a></li>
+            <li><a class="dropdown-item" href="#">Chinese</a></li>
+            <li><a class="dropdown-item" href="#">Japanese</a></li>
+          </ul>
         </div>
-    </section>
-    <!-- Hero Section End-->
+      </div>
+    </nav>
 
-
-
-    <!-- Products Section -->
-    <section class="products">
-        <div class="section-header ">
-            <button class="border-0 btn-text bg-body">All Plants |</button>
-            <button class="border-0 btn-text bg-body">New Arrivals </button>
-            <button class="border-0 btn-text bg-body"> | Sale</button>
+    <!-- main navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container">
+        <a href="#" class="navbar-brand">
+          <!-- place holder for logo - using text fallback with image icon -->
+          <img src="https://placehold.co/200x60/2e4d2a/ffffff?text=Lustria" alt="Lustria" style="height: 45px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="shopDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+              <ul class="dropdown-menu" aria-labelledby="shopDropdown">
+                <li><a class="dropdown-item" href="#">Indoor Plants</a></li>
+                <li><a class="dropdown-item" href="#">Outdoor Plants</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Pots & Planters</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">All Categories</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Blogs</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+              <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
+                <li><a class="dropdown-item" href="#">About</a></li>
+                <li><a class="dropdown-item" href="#">Contact</a></li>
+                <li><a class="dropdown-item" href="#">Team</a></li>
+                <li><a class="dropdown-item" href="#">FAQ</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+          </ul>
+          <div class="header-icons d-flex">
+            <a href="#" class="icon nav-link fa fa-search text-dark"></a>
+            <a href="#" class="icon nav-link fa fa-heart text-dark"></a>
+            <a href="#" class="icon nav-link fa fa-shopping-cart text-dark"></a>
+          </div>
         </div>
-    </section>
+      </div>
+    </nav>
+  </header>
 
+  <!-- ========== HERO SECTION ========== -->
+  <section id="hero" class="hero-sec section-padding">
+    <div class="container-fluid px-4">
+      <div class="row gx-5">
+        <div class="row mt-5">
+          <div class="col-lg-6 col-md-12 mb-4 mb-lg-0" data-aos="zoom-in" data-aos-delay="100">
+            <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=2070&auto=format&fit=crop" class="w-100 shadow-1-strong rounded mb-4 mx-3" style="border-radius: 30px !important; height: auto; object-fit: cover;" alt="Green plants">
+          </div>
+          <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-left" data-aos-delay="200">
+            <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?q=80&w=2070&auto=format&fit=crop" class="w-100 shadow-1-strong rounded mb-4" style="border-radius: 30px !important; height: 335px; object-fit: cover;" alt="Boat on Calm Water">
+            <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2070&auto=format&fit=crop" class="w-100 shadow-1-strong rounded mb-4" style="border-radius: 30px !important; height: 335px; object-fit: cover;" alt="Waves at Sea">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- plants shop categories start -->
+  <!-- ========== PRODUCTS FILTER ========== -->
+  <section class="products">
+    <div class="section-header" data-aos="fade-up">
+      <button class="border-0 btn-text">All Plants |</button>
+      <button class="border-0 btn-text">New Arrivals</button>
+      <button class="border-0 btn-text">| Sale</button>
+    </div>
+  </section>
+
+  <!-- ========== PRODUCTS GRID 1 ========== -->
+  <div class="container py-4">
+    <div class="row text-center" data-aos="fade-up">
+      <!-- product 1 -->
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card product-card position-relative">
+          <div class="position-relative">
+            <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
+            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+              <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+              <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+              <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+              <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+            </div>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+            <p class="fw-bold">$75.00</p>
+          </div>
+        </div>
+      </div>
+      <!-- product 2 -->
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card product-card position-relative">
+          <div class="position-relative">
+            <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
+            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+              <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+              <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+              <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+              <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+            </div>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+            <p class="fw-bold">$75.00</p>
+          </div>
+        </div>
+      </div>
+      <!-- product 3 -->
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card product-card position-relative">
+          <div class="position-relative">
+            <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
+            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+              <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+              <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+              <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+              <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+            </div>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+            <p class="fw-bold">$75.00</p>
+          </div>
+        </div>
+      </div>
+      <!-- product 4 -->
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card product-card position-relative">
+          <div class="position-relative">
+            <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
+            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+              <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+              <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+              <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+              <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+            </div>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+            <p class="fw-bold">$75.00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- second row -->
+    <div class="row text-center" data-aos="fade-up" data-aos-delay="100">
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card product-card position-relative">
+          <div class="position-relative">
+            <img src="https://images.unsplash.com/photo-1509223197845-458d87318791?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
+            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+              <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+              <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+              <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+              <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+            </div>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+            <p class="fw-bold">$75.00</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card product-card position-relative">
+          <div class="position-relative">
+            <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
+            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+              <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+              <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+              <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+              <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+            </div>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+            <p class="fw-bold">$75.00</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card product-card position-relative">
+          <div class="position-relative">
+            <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
+            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+              <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+              <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+              <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+              <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+            </div>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+            <p class="fw-bold">$75.00</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card product-card position-relative">
+          <div class="position-relative">
+            <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
+            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+              <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+              <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+              <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+              <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+            </div>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+            <p class="fw-bold">$75.00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== NEW SUMMER COLLECTION GALLERY ========== -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mb-4" data-aos="fade-up">
+        <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=2070&auto=format&fit=crop" class="card-img-top rounded-4" style="height: auto; object-fit: cover;" alt="Collection">
+        <div class="container-btn">
+          <button class="btn">Seeds <sup>( 1 )</sup></button>
+        </div>
+        <div class="row mt-4">
+          <div class="col-lg-6 col-md-12 mb-4 mb-lg-0" data-aos="fade-up">
+            <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?q=80&w=2070&auto=format&fit=crop" class="w-100 shadow-1-strong rounded mb-4" style="height: 300px; object-fit: cover; border-radius: 24px !important;" alt="Terrariums">
+            <div class="container-btn">
+              <button class="btn-small p-2">Terrariums <sup>( 1 )</sup></button>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+            <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2070&auto=format&fit=crop" class="w-100 shadow-1-strong rounded mb-4" style="height: 300px; object-fit: cover; border-radius: 24px !important;" alt="House Plants">
+            <div class="container-btn">
+              <button class="btn-small p-2">House Plants <sup>( 9 )</sup></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="150">
+        <div class="mb-4">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=2070&auto=format&fit=crop" class="card-img-top rounded-4" style="height: 300px; width: 100%; object-fit: cover;" alt="Potter Plants">
+          <div class="container-btn">
+            <button class="btn">Potter Plants <sup>( 6 )</sup></button>
+          </div>
+        </div>
+        <div>
+          <img src="https://images.unsplash.com/photo-1509223197845-458d87318791?q=80&w=2070&auto=format&fit=crop" class="card-img-top rounded-4" style="height: 300px; width: 100%; object-fit: cover;" alt="Succulents">
+          <div class="container-btn">
+            <button class="btn">Succulents <sup>( 1 )</sup></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== DREAM PLANTS / NEW SUMMER ========== -->
+  <section class="dream-plants mb-5">
     <div class="container py-5">
-        <div class="row text-center" data-aos="fade-up">
-            <div class="col-md-3 col-sm-6 mb-4">
-                <div class="card product-card position-relative">
-                    <div class="position-relative">
-                        <img src="images/images14.jpg" class="card-img-top" alt="Product 2">
-                        <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-
-                        <!-- Hoverable Icon Dropdown -->
-                        <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-                            <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-                            <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-                            <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-                            <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-                        <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-                        <p class="fw-bold">$75.00</p>
-                    </div>
-                </div>
+      <h4 style="color: #7fa15a;" data-aos="fade-up">Find your dream plants</h4>
+      <h2 class="fw-bold mb-5" data-aos="fade-up" data-aos-delay="100">New Summer Collection</h2>
+      <div class="row text-center" data-aos="fade-up" data-aos-delay="150">
+        <!-- product cards same style, repeated for consistency -->
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="card product-card position-relative">
+            <div class="position-relative">
+              <img src="https://images.unsplash.com/photo-1509223197845-458d87318791?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+              <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+              </div>
             </div>
-            <div class="col-md-3 col-sm-6 mb-4">
-                <div class="card product-card position-relative">
-                    <div class="position-relative">
-                        <img src="images/images15.jpg" class="card-img-top" alt="Product 2">
-                        <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-
-                        <!-- Hoverable Icon Dropdown -->
-                        <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-                            <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-                            <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-                            <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-                            <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-                        <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-                        <p class="fw-bold">$75.00</p>
-                    </div>
-                </div>
+            <div class="card-body">
+              <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+              <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+              <p class="fw-bold">$75.00</p>
             </div>
-            <div class="col-md-3 col-sm-6 mb-4">
-                <div class="card product-card position-relative">
-                    <div class="position-relative">
-                        <img src="images/images16.jpg" class="card-img-top" alt="Product 2">
-                        <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-
-                        <!-- Hoverable Icon Dropdown -->
-                        <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-                            <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-                            <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-                            <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-                            <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-                        <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-                        <p class="fw-bold">$75.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 mb-4">
-                <div class="card product-card position-relative">
-                    <div class="position-relative">
-                        <img src="images/images17.jpg" class="card-img-top" alt="Product 2">
-                        <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-
-                        <!-- Hoverable Icon Dropdown -->
-                        <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-                            <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-                            <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-                            <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-                            <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-                        <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-                        <p class="fw-bold">$75.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row" data-aos="fade-up">
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card product-card position-relative">
-                        <div class="position-relative">
-                            <img src="images/images18.jpg" class="card-img-top" alt="Product 2">
-                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-
-                            <!-- Hoverable Icon Dropdown -->
-                            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-                                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-                                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-                                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-                                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-                            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-                            <p class="fw-bold">$75.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card product-card position-relative">
-                        <div class="position-relative">
-                            <img src="images/images19.jpg" class="card-img-top" alt="Product 2">
-                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-
-                            <!-- Hoverable Icon Dropdown -->
-                            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-                                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-                                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-                                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-                                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-                            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-                            <p class="fw-bold">$75.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card product-card position-relative">
-                        <div class="position-relative">
-                            <img src="images/images20.jpg" class="card-img-top" alt="Product 2">
-                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-
-                            <!-- Hoverable Icon Dropdown -->
-                            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-                                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-                                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-                                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-                                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-                            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-                            <p class="fw-bold">$75.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card product-card position-relative">
-                        <div class="position-relative">
-                            <img src="images/images21.jpg" class="card-img-top" alt="Product 2">
-                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-
-                            <!-- Hoverable Icon Dropdown -->
-                            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-                                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-                                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-                                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-                                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-                            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-                            <p class="fw-bold">$75.00</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="card product-card position-relative">
+            <div class="position-relative">
+              <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+              <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+              <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+              <p class="fw-bold">$75.00</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="card product-card position-relative">
+            <div class="position-relative">
+              <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+              <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+              <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+              <p class="fw-bold">$75.00</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="card product-card position-relative">
+            <div class="position-relative">
+              <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=2070&auto=format&fit=crop" class="card-img-top" alt="Plant">
+              <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
+              <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
+                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
+                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
+                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
+                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
+              <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
+              <p class="fw-bold">$75.00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-3" data-aos="fade-up">
+        <div class="btn btn-outline-dark p-3 border border-1 btn-lg">
+          <i class="fa fa-plus me-2"></i> Shop all plants
+        </div>
+      </div>
     </div>
-    <!-- plants shop categories end -->
+  </section>
 
-    <!-- New Summer Collection -->
+  <!-- ========== TESTIMONIALS ========== -->
+  <section class="testimonials">
+    <section class="home-testimonial-bottom">
+      <div class="container testimonial-inner">
+        <h4 style="color: #7fa15a;" data-aos="fade-up">Welcome to Lustria</h4>
+        <h2 class="fw-bold mb-5" data-aos="fade-up" data-aos-delay="100">Testimonials</h2>
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-4 style-3" data-aos="fade-up" data-aos-delay="150">
+            <div class="tour-item">
+              <div class="tour-desc">
+                <div class="tour-text color-grey-3 text-center">Your level of support and dedication is second to none. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollita nccaecat cupidatat non owifn</div>
+                <div class="d-flex justify-content-center pt-2 pb-2">
+                  <img class="tm-people" src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
+                </div>
+                <div class="link-name d-flex justify-content-center">Sally Ramsey</div>
+                <div class="link-position d-flex justify-content-center"> / Reporter</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 style-3" data-aos="fade-up" data-aos-delay="200">
+            <div class="tour-item">
+              <div class="tour-desc">
+                <div class="tour-text color-grey-3 text-center">Your level of support and dedication is second to none. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollita nccaecat cupidatat non owifn</div>
+                <div class="d-flex justify-content-center pt-2 pb-2">
+                  <img class="tm-people" src="https://randomuser.me/api/portraits/women/68.jpg" alt="">
+                </div>
+                <div class="link-name d-flex justify-content-center">Sally Ramsey</div>
+                <div class="link-position d-flex justify-content-center"> / Reporter</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 style-3" data-aos="fade-up" data-aos-delay="250">
+            <div class="tour-item">
+              <div class="tour-desc">
+                <div class="tour-text color-grey-3 text-center">Your level of support and dedication is second to none. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollita nccaecat cupidatat non owifn</div>
+                <div class="d-flex justify-content-center pt-2 pb-2">
+                  <img class="tm-people" src="https://randomuser.me/api/portraits/women/32.jpg" alt="">
+                </div>
+                <div class="link-name d-flex justify-content-center">Sally Ramsey</div>
+                <div class="link-position d-flex justify-content-center"> / Reporter</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer text-light py-5">
     <div class="container">
-
-        <div class="row">
-            <div class="col-md-6 mb-4" data-aos="fade-up">
-
-                <img src="images/collection1.jpg" class="card-img-top" width="100%" height="auto" alt="Image 4">
-                <div class="container-btn">
-
-                    <button class="btn ">Seeds <sup>( 1 )</sup></button>
-                </div>
-
-                <!-- Gallery -->
-                <div class="row mt-4">
-                    <div class="col-lg-6 col-md-12 mb-4 mb-lg-0" data-aos="fade-up">
-                        <img src="images/collection3.jpg" class="w-100 shadow-1-strong rounded mb-4" width="100%"
-                            height="300px" alt="Boat on Calm Water" />
-                        <div class="container-btn">
-
-                            <button class="btn-small p-2">Terrariums <sup>( 1 )</sup></button>
-                        </div>
-
-
-
-                    </div>
-
-                    <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-up">
-
-                        <img src="images/collection4.jpg" class="w-100 shadow-1-strong rounded mb-4" width="100%"
-                            height="300px" alt="Boat on Calm Water" />
-                        <div class="container-btn">
-
-                            <button class="btn-small p-2">House Plants <sup>( 9 )</sup></button>
-                        </div>
-
-                    </div>
-
-
-                </div>
-                <!-- Gallery -->
-            </div>
-
-            <div class="col-md-6 mb-4" data-aos="fade-up">
-                <div class=" mb-4">
-                    <img src="images/collection2.jpg" class="card-img-top " width="100%" height="300px" alt="Image 1">
-                    <div class="container-btn">
-
-                        <button class="btn">Potter Plants <sup>( 6 )</sup></button>
-                    </div>
-
-
-                </div>
-                <div>
-                    <img src="images/collection5.jpg" class="card-img-top" alt="Image 5">
-
-                    <div class="container-btn">
-
-                        <button class="btn">Succulents <sup>( 1 )</sup></button>
-                    </div>
-
-
-                </div>
-            </div>
-
+      <div class="row align-items-center">
+        <div class="col-auto" data-aos="fade-right">
+          <h3 style="color: #7fa15a;">Subscribe Us</h3>
+          <h2 class="pt-2">Can we get in-touch<br> closer</h2>
         </div>
+        <div class="col-md-5 col-12" data-aos="fade-up">
+          <div class="form-outline form-white mb-4">
+            <input type="email" id="form5Example2" placeholder="your email address" class="footer-input" />
+          </div>
+        </div>
+        <div class="col-auto" data-aos="fade-left">
+          <button type="submit" class="subcription-btn p-3">
+            Subscribe <i class="mx-2 fa fa-arrow-right fa-xl"></i>
+          </button>
+        </div>
+      </div>
+      <hr class="text-muted my-4">
+      <div class="row p-4">
+        <div class="col-md-3" data-aos="fade-up">
+          <div class="d-flex align-items-center mb-3">
+            <img src="https://placehold.co/200x60/2e4d2a/ffffff?text=Lustria" alt="Lustria" height="60" class="me-2" style="border-radius: 12px;">
+          </div>
+          <p class="text-muted">Can we get in-touch closer</p>
+        </div>
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+          <h6 style="color: #7fa15a;"><i class="fa fa-phone me-2"></i>Phone:</h6>
+          <p class="text-muted">Mobile (+00) 987 877 821</p>
+          <p class="text-muted">Fax 678 912 1289 121</p>
+        </div>
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="150">
+          <h6 style="color: #7fa15a;"><i class="fa fa-home me-2"></i>Address:</h6>
+          <p class="text-muted">No 40 Baria Street 15/2</p>
+          <p class="text-muted">NewYork City, NY, United States.</p>
+        </div>
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+          <h6 style="color: #7fa15a;"><i class="fa fa-message me-2"></i>Email:</h6>
+          <p class="text-muted">No 40 Baria Street 15/2</p>
+          <p class="text-muted">NewYork City, NY, United States.</p>
+        </div>
+      </div>
+      <hr class="text-muted my-4">
+      <div class="d-flex justify-content-center align-items-center">
+        <p class="text-light mb-0">Copyright © 2022 Lustria. All Rights Reserved</p>
+      </div>
     </div>
+  </footer>
 
+  <!-- ========== SCRIPTS ========== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize AOS with a smooth, responsive feel
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-out-quad',
+      offset: 40,
+    });
 
-    <!-- dream plant sec start -->
-    <section class="dream-plants mb-5">
-        <div class="container py-5">
-            <h4 style="color: #7fa15a;" data-aos="fade-up">Find your dream plants</h4>
-            <h2 class="fw-bold mb-5" data-aos="fade-up">New Summer Collection</h2>
-            <div class="row text-center" data-aos="fade-up">
-
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card product-card position-relative">
-                        <div class="position-relative">
-                            <img src="images/images18.jpg" class="card-img-top" alt="Product 2">
-                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-
-                            <!-- Hoverable Icon Dropdown -->
-                            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-                                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-                                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-                                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-                                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-                            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-                            <p class="fw-bold">$75.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card product-card position-relative">
-                        <div class="position-relative">
-                            <img src="images/images19.jpg" class="card-img-top" alt="Product 2">
-                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-
-                            <!-- Hoverable Icon Dropdown -->
-                            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-                                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-                                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-                                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-                                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-                            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-                            <p class="fw-bold">$75.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card product-card position-relative">
-                        <div class="position-relative">
-                            <img src="images/images20.jpg" class="card-img-top" alt="Product 2">
-                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-
-                            <!-- Hoverable Icon Dropdown -->
-                            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-                                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-                                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-                                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-                                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-                            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-                            <p class="fw-bold">$75.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card product-card position-relative">
-                        <div class="position-relative">
-                            <img src="images/images21.jpg" class="card-img-top" alt="Product 2">
-                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">SALE</span>
-
-                            <!-- Hoverable Icon Dropdown -->
-                            <div class="icon-dropdown position-absolute top-50 end-0 translate-middle-y">
-                                <a href="#" class="d-block mb-2"><i class="bi bi-cart"></i></a>
-                                <a href="#" class="d-block mb-2"><i class="bi bi-heart"></i></a>
-                                <a href="#" class="d-block mb-2"><i class="bi bi-search"></i></a>
-                                <a href="#" class="d-block"><i class="bi bi-tools"></i></a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title text-muted mb-2">Aliquam lobortis</h6>
-                            <p class="mb-0 text-decoration-line-through text-muted">$87.00</p>
-                            <p class="fw-bold">$75.00</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="container">
-                <div class="btn btn-outline-dark p-3  border border-1 btn-lg" type="button"><i class="fa fa-plus"
-                        aria-hidden="true"></i>
-                    Shop all plants</div>
-            </div>
-        </div>
-    </section>
-    <!-- dream plant sec end -->
-
-
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <section class="home-testimonial-bottom">
-            <div class="container testimonial-inner">
-                <h4 style="color: #7fa15a;" data-aos="fade-up">Welcome to Lustria</h4>
-                <h2 class="fw-bold mb-5" data-aos="fade-up">Testimonials</h2>
-                <h2 class=" text-dark fw-bold"></h2>
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-4 style-3">
-                        <div class="tour-item ">
-                            <div class="tour-desc ">
-                                <div class="tour-text color-grey-3 text-center ">Your level of support and dedication is
-                                    second to none. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                    officia deseru mollita nccaecat cupidatat non owifn</div>
-                                <div class="d-flex justify-content-center pt-2 pb-2">
-                                    <img class="tm-people" src="images/testimonial-profile2.jpg" alt="">
-                                </div>
-                                <div class="link-name d-flex justify-content-center">Sally Ramsey</div>
-                                <div class="link-position d-flex justify-content-center"> / Reporter</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 style-3">
-                        <div class="tour-item ">
-                            <div class="tour-desc ">
-                                <div class="tour-text color-grey-3 text-center">Your level of support and dedication is
-                                    second to none. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                    officia deseru mollita nccaecat cupidatat non owifn</div>
-                                <div class="d-flex justify-content-center pt-2 pb-2"><img class="tm-people"
-                                        src="images/testimonial-profile2.jpg" alt=""></div>
-                                <div class="link-name d-flex justify-content-center">Sally Ramsey</div>
-                                <div class="link-position d-flex justify-content-center"> / Reporter</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 style-3">
-                        <div class="tour-item ">
-                            <div class="tour-desc ">
-                                <div class="tour-text color-grey-3 text-center">Your level of support and dedication is
-                                    second to none. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                    officia deseru mollita nccaecat cupidatat non owifn</div>
-                                <div class="d-flex justify-content-center pt-2 pb-2"><img class="tm-people"
-                                        src="images/testimonial-profile2.jpg" alt=""></div>
-                                <div class="link-name d-flex justify-content-center">Sally Ramsey</div>
-                                <div class="link-position d-flex justify-content-center"> / Reporter</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </section>
-    </section>
-
-
-
-    <!-- Footer -->
-    <footer class="footer text-light py-5">
-        <div class="container">
-            <div class="row ">
-
-                <div class="col-auto">
-                    <h3 style="color: #7fa15a;">Subscribe Us</h3>
-                    <h2 class="pt-2">
-
-                        Can we get in-touch<br> closer
-                    </h2>
-                </div>
-
-                <div class="col-md-5 col-12">
-                    <!-- Email input -->
-                    <div class="form-outline form-white mb-4">
-                        <input type="email" id="form5Example2" placeholder="your email address" class="footer-input" />
-
-                    </div>
-                </div>
-
-
-
-                <div class="col-auto">
-                    <!-- Submit button -->
-                    <button type="submit" class="subcription-btn p-3 ">
-                        Subscribe <i class="mx-2 fa fa-arrow-right fa-xl"></i>
-                    </button>
-                </div>
-
-            </div>
-            <hr class="text-muted my-4">
-            <div class="row p-4">
-                <div class="col-md-3">
-                    <div class="d-flex align-items-center mb-3">
-                        <img src="images/footer-logo.png" alt="Lustria" height="60" class="me-2">
-
-                    </div>
-                    <p class="text-muted">Can we get in-touch closer</p>
-                </div>
-                <div class="col-md-3">
-                    <h6 style="color: #7fa15a;"> <i class="fa fa-phone"></i> Phone:</h6>
-                    <p class="text-muted">Mobile (+00) 987 877 821</p>
-                    <p class="text-muted">Fax 678 912 1289 121</p>
-                </div>
-                <div class="col-md-3">
-                    <h6 style="color: #7fa15a;"><i class="fa fa-home"></i> Address:</h6>
-                    <p class="text-muted">No 40 Baria Street 15/2</p>
-                    <p class="text-muted">NewYork City, NY, United States.</p>
-                </div>
-                <div class="col-md-3">
-                    <h6 style="color: #7fa15a;"><i class="fa fa-message"></i> Email:</h6>
-                    <p class="text-muted">No 40 Baria Street 15/2</p>
-                    <p class="text-muted">NewYork City, NY, United States.</p>
-                </div>
-            </div>
-            <hr class="text-muted my-4">
-            <div class="d-flex justify-content-center align-items-center">
-
-
-                <p class="text-light">Copyright © 2022 Lustria. All Rights Reserved</p>
-
-            </div>
-
-        </div>
-
-
-    </footer>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script>
-
-        AOS.init({
-            duration: 1000,
-            once: true,
-        });
-
-    </script>
+    // Optional: small parallax or extra hover polish (not needed, already smooth)
+    // But we can add a tiny effect: navbar shadow on scroll
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.boxShadow = '0 8px 20px -10px rgba(0, 0, 0, 0.1)';
+      } else {
+        navbar.style.boxShadow = 'none';
+      }
+    });
+  </script>
 </body>
-
 </html>
